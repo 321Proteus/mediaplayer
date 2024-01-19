@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <title> ElectronMP3 </title>
+    <script defer src="./controls.js"></script>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="js/player.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="box settings-container">
+        <img src="images/settings.png" class="button" id="settings-button">
+      </div>
+
+
+      <div class="box title-container">
+        <h1 id="title">Test Media Player</h1>
+      </div>
+      <div class="box playlist-container">
+        <img src="images/settings.png" class="button" id="playlist-button">
+      </div>
+      <!-- <hr id="header-bottom"> -->
+    </div>
+    <div class="player-menu">
+      <div id="title-overlay">Song Title</div>
+      <input type="range" step=0.01 id="progress-slider">
+      <div id="player-btn-container">
+        <img src="images/previous.png" class="button" id="player-button" onclick="handleButton(this, `prev`)">
+        <img src="images/backward.png" class="button" id="player-button" onclick="handleButton(this, `back`)">
+        <img src="images/play.png"     class="button" id="player-button" onclick="handleButton(this, `play`)">
+        <img src="images/forward.png"  class="button" id="player-button" onclick="handleButton(this, `forw`)">
+        <img src="images/next.png"     class="button" id="player-button" onclick="handleButton(this, `next`)">
+      </div>
+      <!-- <label for="progress-slider">P</label> -->
+    </div>
+
+    <!-- <table class='player-table'>
+      <tr>
+        <td style="width:250px;">
+          <div class="song-playing">
+            <div id="song-name"></div>
+            <div id="song-performer"></div>
+            <div id="song-duration"></div>
+          </div>
+        </td>
+        <td style="width:250px;">
+          <h2>MP3s</h2>
+          <div class="mp3-list">
+                <div id="select-form-div">
+
+                </div>
+              <br>
+              <table>
+                <tr>
+                  <td>
+                    <form id='delete-form'>
+                      <button id="delete-btn" type="submit">Delete Selected</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form id='add-form'>
+                      <button id="add-btn" type="submit">Add a Song</button>
+                    </form>
+                  </td>
+                </tr>
+              </table>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <div class='volume-etc'>
+          <td>
+
+            <form id='volume-select'>
+              <label><strong>Volume Slider:</strong></label>
+              <input type="range" id='volume' name="volume" value="100" min="0" max="100" step="1">
+            </form>
+          </td>
+          <td id="volume-label"> <strong>Volume:</strong><br> 100 </td>
+        </div>
+      </tr>
+    </table> -->
+
+  </body>
+</html>
