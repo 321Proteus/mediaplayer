@@ -6,10 +6,8 @@
     <meta charset="utf-8">
     <title> ElectronMP3 </title>
     <script defer src="./controls.js"></script>
-    <script>window.$ = window.jQuery = require('jquery');</script>
-    <script src="js/player.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./main.css">
 
   </head>
 
@@ -21,15 +19,20 @@
 
 
       <div class="box title-container">
-        <h1 id="title">Test Media Player</h1>
+        <h1 id="app-title">Test Media Player</h1>
       </div>
       <div class="box playlist-container">
         <img src="images/settings.png" class="button" id="playlist-button">
       </div>
       <!-- <hr id="header-bottom"> -->
     </div>
-    <div class="player-menu">
+
+    <div class="player-icon">
+
+    </div>
+    <div class="player-controls">
       <div id="title-overlay">Song Title</div>
+      <div id="author-overlay">Artist Title</div>
       <input type="range" step=0.01 id="progress-slider">
       <div id="player-btn-container">
         <img src="images/previous.png" class="button" id="player-button" onclick="handleButton(this, `prev`)">

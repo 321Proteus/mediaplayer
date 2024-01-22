@@ -5,7 +5,6 @@ for(const button of playerButtons)
 	
 	button.addEventListener("mouseover", (e) => {
 
-		// button.style.animation = "player-button 0.5s";
 		console.log(button, e);
 	})
 
@@ -28,3 +27,11 @@ window.addEventListener("playerbtnclick", function(data) {
 		else el.setAttribute("src", "images/play.png");
 	}
 });
+
+document.getElementById("progress-slider").oninput = function() {
+
+	var value = this.value;
+	// Math.floor(Math.random()*16777215).toString(16);
+	document.documentElement.style.setProperty("--color", `linear-gradient(to right, #75DD82 0%, #75DD82 ${value}%, gray ${value}%, gray 100%)`);
+
+};
