@@ -2,6 +2,17 @@
     --color: linear-gradient(to right, #75DD82 0%, #75DD82 50%, gray 50%, gray 100%)
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0 8px 0 8px;
+}
+
 .header {
     position: relative;
     display: flex;
@@ -9,17 +20,13 @@
     border-bottom: 1px solid black;
 }
 
-.box {
+.header-box {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .settings-container {
-    flex: 0 0 15%;
-}
-
-.playlist-container {
     flex: 0 0 15%;
 }
 
@@ -33,25 +40,31 @@
     font-family: "Comic Sans MS", sans-serif;
 }
 
-.player-icon {
-    position: absolute;
-    left: 10%;
+.player-container {
     display: flex;
+
+    justify-content: center;
+    align-content: center;
+
+    padding: 10% 0 0 0;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.cover {
+    display: flex;
+
     justify-content: center;
     align-items: center;
     background-color: rgb(191, 233, 196);
     border-radius: 16px;
-    margin-top: 15%;
+    margin: -10% 15% 15% 15%;
     width: 80%;
     aspect-ratio: 1/1;
 }
 
 .player-controls {
-    position: fixed;
-    bottom: 10%;
-    left: 10%;
-    right: 10%;
-
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -109,7 +122,6 @@
 
 .button {
     max-width: 60%;
-    min-width: 40%;
     max-height: 80%;
     cursor: pointer;
 
@@ -123,63 +135,54 @@
     flex: 1;
 }
 
-
 .button:hover {
     opacity: 0.7;
     transform: scale(0.9);
 }
 
-
-
 @media (min-aspect-ratio: 1/1) {
 
-    .header {
-        position: relative;
-        display: flex;
-        max-height: 100px;
-        border-bottom: 1px solid black;
-    }
 
-    #player-button {
-        max-width: 20%;
-        max-height: 20%;
-        padding-left: 10px;
-        padding-right: 10px;
+    .title-container {
         flex: 1;
     }
 
+
+    #app-title {
+        font-size: 64px;
+    }
+
+    .player-container {
+        padding: 0;
+    }
+
+    .cover {
+        margin: 0;
+        width: 30%;
+        max-width: 500px;
+    }
+
     #title-overlay {
-        position: absolute;
-        text-align: center;
-        margin-bottom: 100px;
-        min-width: 100%;
-        font-size: 16px;
-        font-family: "Comic Sans MS", sans-serif;
+        font-size: 36px;
+    }
+    
+    #author-overlay {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    #progress-slider {
+        max-width: 90%;
+        margin-bottom: -25px;
     }
 
     #player-btn-container {
-        position: relative;
-        left: 20%;
-        display: flex;
-        justify-content: center;
-    
         column-gap: 5%;
-        max-width: 60%;
     }
 
-    .player-menu {
-        position: fixed;
-        bottom: 3%;
-        left: 10%;
-        right: 10%;
+    #player-button {
+        scale: 0.8;
     }
 
-    #settings-button {
-        scale: 0.5;
-    }
-
-    #playlist-button {
-        scale: 0.5;
-    }
 
 }

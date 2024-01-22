@@ -13,21 +13,21 @@
 
   <body>
     <div class="header">
-      <div class="box settings-container">
+      <div class="header-box settings-container">
         <img src="images/settings.png" class="button" id="settings-button">
       </div>
 
 
-      <div class="box title-container">
+      <div class="header-box title-container">
         <h1 id="app-title">Test Media Player</h1>
-      </div>
-      <div class="box playlist-container">
-        <img src="images/settings.png" class="button" id="playlist-button">
       </div>
       <!-- <hr id="header-bottom"> -->
     </div>
 
-    <div class="player-icon">
+    <div class="player-container">
+      <div class="cover"></div>  
+    </div>
+
 
     </div>
     <div class="player-controls">
@@ -35,11 +35,11 @@
       <div id="author-overlay">Artist Title</div>
       <input type="range" step=0.01 id="progress-slider">
       <div id="player-btn-container">
-        <img src="images/previous.png" class="button" id="player-button" onclick="handleButton(this, `prev`)">
+        <img src="images/loop.png"     class="button" id="player-button" onclick="handleButton(this, `loop`)">
         <img src="images/backward.png" class="button" id="player-button" onclick="handleButton(this, `back`)">
         <img src="images/play.png"     class="button" id="player-button" onclick="handleButton(this, `play`)">
         <img src="images/forward.png"  class="button" id="player-button" onclick="handleButton(this, `forw`)">
-        <img src="images/next.png"     class="button" id="player-button" onclick="handleButton(this, `next`)">
+        <img src="images/playlist.png" class="button" id="player-button" onclick="handleButton(this, `list`)">
       </div>
       <!-- <label for="progress-slider">P</label> -->
     </div>
