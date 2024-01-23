@@ -5,13 +5,21 @@
 
     <meta charset="utf-8">
     <title> ElectronMP3 </title>
+
     <script defer src="./controls.js"></script>
+    <script type="module" defer src="./player.js"></script>
+    <script src="https://unpkg.com/id3-parser/lib/index.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="./main.css">
 
   </head>
 
   <body>
+
+    <div class="modal-container"></div>
+
     <div class="header">
       <div class="header-box settings-container">
         <img src="images/settings.png" class="button" id="settings-button">
@@ -28,8 +36,6 @@
       <div class="cover"></div>  
     </div>
 
-
-    </div>
     <div class="player-controls">
       <div id="title-overlay">Song Title</div>
       <div id="author-overlay">Artist Title</div>
@@ -43,53 +49,6 @@
       </div>
       <!-- <label for="progress-slider">P</label> -->
     </div>
-
-    <!-- <table class='player-table'>
-      <tr>
-        <td style="width:250px;">
-          <div class="song-playing">
-            <div id="song-name"></div>
-            <div id="song-performer"></div>
-            <div id="song-duration"></div>
-          </div>
-        </td>
-        <td style="width:250px;">
-          <h2>MP3s</h2>
-          <div class="mp3-list">
-                <div id="select-form-div">
-
-                </div>
-              <br>
-              <table>
-                <tr>
-                  <td>
-                    <form id='delete-form'>
-                      <button id="delete-btn" type="submit">Delete Selected</button>
-                    </form>
-                  </td>
-                  <td>
-                    <form id='add-form'>
-                      <button id="add-btn" type="submit">Add a Song</button>
-                    </form>
-                  </td>
-                </tr>
-              </table>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <div class='volume-etc'>
-          <td>
-
-            <form id='volume-select'>
-              <label><strong>Volume Slider:</strong></label>
-              <input type="range" id='volume' name="volume" value="100" min="0" max="100" step="1">
-            </form>
-          </td>
-          <td id="volume-label"> <strong>Volume:</strong><br> 100 </td>
-        </div>
-      </tr>
-    </table> -->
 
   </body>
 </html>
