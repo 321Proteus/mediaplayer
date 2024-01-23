@@ -24,11 +24,10 @@ function formatTime(s) {
 
 function getSongTime(player) {
 
-    var container = document.getElementById("author-overlay");
-
     var current = Math.floor(player.currentTime).toString();
     var duration = Math.floor(player.duration).toString();
 
-    container.innerHTML = formatTime(current) + '/' + formatTime(duration);
+    document.getElementById("song-time").innerHTML = formatTime(current);
+    document.getElementById("song-duration").innerHTML = formatTime(duration);
 
 }
