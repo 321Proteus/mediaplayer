@@ -30,4 +30,11 @@ function getSongTime(player) {
     document.getElementById("song-time").innerHTML = formatTime(current);
     document.getElementById("song-duration").innerHTML = formatTime(duration);
 
+    var slider = document.getElementById("progress-slider");
+    slider.value = current;
+    slider.max = duration;
+
+    var valuePercent = current/duration * 100;
+    transformSlider(valuePercent);
+
 }

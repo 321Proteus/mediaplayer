@@ -21,7 +21,7 @@ window.addEventListener("playerbtnclick", function(data) {
 
 	el = data.detail.sender;
 	id = data.detail.id;
-	// alert("Pressed button " + id);
+	// alert("Pressed button: " + id);
 
 	if (id == "play") {
 
@@ -37,12 +37,20 @@ window.addEventListener("playerbtnclick", function(data) {
 	}
 });
 
+function transformSlider(a) {
+	document.documentElement.style.setProperty("--color", `linear-gradient(to right, #75DD82 0%, #75DD82 ${a}%, gray ${a}%, gray 100%)`);
+}
+
 document.getElementById("progress-slider").oninput = function() {
 
 	var value = this.value;
-	// Math.floor(Math.random()*16777215).toString(16);
-	document.documentElement.style.setProperty("--color", `linear-gradient(to right, #75DD82 0%, #75DD82 ${value}%, gray ${value}%, gray 100%)`);
-
+	transformSlider(value)
+	
+	var player = document.getElementById("player");
+	if (player) {
+		player.currentTime = value;
+	}
+	
 };
 
 document.body.addEventListener('dragover', function(event) {
