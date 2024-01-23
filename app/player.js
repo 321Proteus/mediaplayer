@@ -1,18 +1,3 @@
-function metadata(file) {
-
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        var arrayBuffer = e.target.result;
-
-        var tags = parse(arrayBuffer);
-
-        document.getElementById("title-overlay").innerHTML = tags.title + " " + tags.artist;
-    }
-
-    reader.readAsArrayBuffer(file)
-}
-
 function playAudio(file) {
     player = document.createElement("audio");
 
@@ -27,7 +12,6 @@ function playAudio(file) {
     console.log(player);
 }
 
-// Format the time from "s" to "hh:mm:ss"
 function formatTime(s) {
     var h = Math.floor(s / 3600);
     var m = Math.floor((s - 3600 * h) / 60);
@@ -40,14 +24,10 @@ function formatTime(s) {
 
 function getSongTime(player) {
 
-    // The container to display song time
     var container = document.getElementById("author-overlay");
 
-    // Get the song duration and current time from the player
     var current = Math.floor(player.currentTime).toString();
     var duration = Math.floor(player.duration).toString();
-
-    // Print out formatted time
 
     container.innerHTML = formatTime(current) + '/' + formatTime(duration);
 

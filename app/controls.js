@@ -6,7 +6,8 @@ for (const button of playerButtons)
 	button.addEventListener("mouseover", (e) => {
 
 	//	console.log(button, e);
-	})
+
+})
 
 function handleButton(sender, id) {
 
@@ -20,7 +21,7 @@ window.addEventListener("playerbtnclick", function(data) {
 
 	el = data.detail.sender;
 	id = data.detail.id;
-	// alert("Wcisnieto przycisk " + id);
+	// alert("Pressed button " + id);
 
 	if (id == "play") {
 
@@ -57,11 +58,11 @@ document.body.addEventListener('drop', function(event) {
 	var files = event.dataTransfer.files;
 
     for (let i = 0; i < files.length; i++) {
-      console.log('Nazwa pliku:', files[i].name);
-      console.log('Typ pliku:', files[i].type);
-      console.log('Rozmiar pliku:', files[i].size, 'bajtów');
+      console.log('File name:', files[i].name);
+      console.log('File type:', files[i].type);
+      console.log('File size:', files[i].size, 'bytes');
     }
-	metadata(files[0]);
+
 	playAudio(files[0]);
 	
 });

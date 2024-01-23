@@ -7,8 +7,7 @@
     <title> ElectronMP3 </title>
 
     <script defer src="./controls.js"></script>
-    <script type="module" defer src="./player.js"></script>
-    <script src="https://unpkg.com/id3-parser/lib/index.js"></script>
+    <script defer src="./player.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,7 +21,7 @@
 
     <div class="header">
       <div class="header-box settings-container">
-        <img src="images/settings.png" class="button" id="settings-button">
+        <img src="images/settings.png" class="button" id="settings-button" onclick="handleButton(this, `settings`)">
       </div>
 
 
