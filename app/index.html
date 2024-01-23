@@ -38,7 +38,13 @@
     <div class="player-controls">
       <div id="title-overlay">Song Title</div>
       <div id="author-overlay">Artist Title</div>
-      <input type="range" step=0.01 id="progress-slider">
+
+      <div id="time-container">
+        <div id="song-time">0:00</div>
+        <input type="range" step=0.01 id="progress-slider">
+        <div id="song-duration">0:00</div>
+      </div>
+
       <div id="player-btn-container">
         <img src="images/loop.png"     class="button" id="player-button" onclick="handleButton(this, `loop`)">
         <img src="images/backward.png" class="button" id="player-button" onclick="handleButton(this, `back`)">

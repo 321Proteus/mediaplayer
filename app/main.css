@@ -75,7 +75,7 @@ body {
     flex: 1%;
 
     text-align: center;
-    font-size: 48px;
+    font-size: 42px;
     font-family: "Comic Sans MS", sans-serif;
 }
 
@@ -83,17 +83,38 @@ body {
     flex: 1%;
 
     text-align: center;
-    font-size: 36px;
+    font-size: 28px;
     color: gray;
     font-family: "Comic Sans MS", sans-serif;
 }
 
-#progress-slider { 
+#time-container {
     width: 100%;
-    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#progress-slider { 
+
+    flex: 80%;
+    height: 20px;
 
     appearance: none;
     background-color: transparent;
+
+}
+
+#song-time {
+    flex: 10%;
+    text-align: center;
+    font-family: "Comic Sans MS", sans-serif;
+}
+
+#song-duration {
+    flex: 10%;
+    text-align: center;
+    font-family: "Comic Sans MS", sans-serif;
 }
 
 #progress-slider::-webkit-slider-thumb {
@@ -101,9 +122,9 @@ body {
     border: 1px solid #000;
     background-color: #fff;
     border-radius: 5px;
-    height: 18px;
+    height: 24px;
     width: 12px;
-    margin-top: -2px;
+    margin-top: -4px;
 }
 
 ::-webkit-slider-runnable-track {
@@ -142,11 +163,9 @@ body {
 
 @media (min-aspect-ratio: 1/1) {
 
-
     .title-container {
         flex: 1;
     }
-
 
     #app-title {
         font-size: 64px;
@@ -169,11 +188,6 @@ body {
     #author-overlay {
         font-size: 24px;
         margin-bottom: 15px;
-    }
-
-    #progress-slider {
-        max-width: 90%;
-        margin-bottom: -25px;
     }
 
     #player-btn-container {
