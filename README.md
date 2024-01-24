@@ -4,8 +4,9 @@ You can use it both as a desktop application (using Electron) and as a browser p
 
 To do:
 
-~~- Fix the progress bar so sliding it changes the sone time~~~ done
-~~- Add WAV, OGG support (SIMP only reads MP3 so far)~~ turned out that it actually does :)
+- ~~Fix the progress bar so sliding it changes the sone time~~ done
+
+- ~~Add WAV, OGG support (SIMP only reads MP3 so far)~~ turned out that it actually does :)
 - Add playlist logic (shuffle, next/previous song etc.)
 - Add ability to parse ID3 tags from file (e.g. to display cover image)
 
