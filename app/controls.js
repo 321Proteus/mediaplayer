@@ -72,6 +72,17 @@ document.body.addEventListener('drop', function(event) {
     }
 
 	playAudio(files[0]);
-	
+
+  var meta = loadMetadata(files[0])
+  .then((data) => {
+    
+    document.getElementById("title-overlay").innerText = data.title;
+    document.getElementById("author-overlay").innerText = data.artist;
+    getCover(data.picture.data, data.picture.format)
+
+  });
+
+  playAudio(files[0]);
 });
+
 

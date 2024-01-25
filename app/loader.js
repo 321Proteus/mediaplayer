@@ -1,18 +1,14 @@
 var jsmedia = window.jsmediatags;
 
 function loadMetadata(file) {
-    return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
 
-        jsmedia.read(file, {
-            onSuccess: function(tag) {
-                console.log(tag.tags)
-                resolve(tag.tags);
-            },
-            onError: function(err) {
-                reject(err);
-            }
-        });
+    jsmedia.read(file, {
+
+      onSuccess: (tag) => resolve(tag.tags),
+      onError: (err) => reject(err),
     });
+  });
 }
 
 function getCover(data, fmt) {
