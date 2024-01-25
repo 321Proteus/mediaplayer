@@ -6,7 +6,11 @@ function loadMetadata(file) {
     jsmedia.read(file, {
 
       onSuccess: (tag) => resolve(tag.tags),
-      onError: (err) => reject(err),
+      onError: (err) => {
+        err.title = file.name;
+        err.artist = "Unknown";
+        reject(err);
+      }
     });
   });
 }
@@ -22,5 +26,5 @@ function getCover(data, fmt) {
   cover.src = `data:${fmt};base64,${window.btoa(base64)}`;
     
   container.append(cover);
-  
+
 }

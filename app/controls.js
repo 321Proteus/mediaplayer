@@ -58,14 +58,20 @@ document.body.addEventListener('drop', function(event) {
     }
 
 	loadMetadata(files[0])
-		.then((data) => {
-			
+	.then(data => {
+
 			document.getElementById("title-overlay").innerText = data.title;
 			document.getElementById("author-overlay").innerText = data.artist;
 			getCover(data.picture.data, data.picture.format)
 
-		});
+	})
+  .catch(err => {
 
+      console.log("Error:", err.info);
+      document.getElementById("title-overlay").innerText = err.title.split('.')[0];
+      document.getElementById("author-overlay").innerText = err.artist;
+
+  });
 	playAudio(files[0]);
 
 });
