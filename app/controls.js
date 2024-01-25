@@ -72,6 +72,7 @@ document.body.addEventListener('drop', function(event) {
       document.getElementById("author-overlay").innerText = err.artist;
 
   });
+  refreshPlayer();
 	playAudio(files[0]);
 
 });

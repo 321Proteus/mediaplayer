@@ -11,6 +11,12 @@ function playAudio(file) {
     switchPlayState()
 }
 
+function refreshPlayer() {
+    var player = document.getElementById("player");
+
+    if (player) player.remove();
+}
+
 function switchPlayState() {
     var playButton = document.getElementById("play");
     var player = document.getElementById("player");
