@@ -49,11 +49,11 @@
       </div>
 
       <div id="player-btn-container">
-        <img src="images/loop.png"     class="button" id="player-button" onclick="handleButton(this, `loop`)">
-        <img src="images/backward.png" class="button" id="player-button" onclick="handleButton(this, `back`)">
-        <img src="images/play.png"     class="button" id="player-button" onclick="handleButton(this, `play`)">
-        <img src="images/forward.png"  class="button" id="player-button" onclick="handleButton(this, `forw`)">
-        <img src="images/playlist.png" class="button" id="player-button" onclick="handleButton(this, `list`)">
+        <img src="images/loop.png"     class="button player-button" id="loop" onclick="handleButton(this.id)">
+        <img src="images/backward.png" class="button player-button" id="prev" onclick="handleButton(this.id)">
+        <img src="images/play.png"     class="button player-button" id="play" onclick="handleButton(this.id)">
+        <img src="images/forward.png"  class="button player-button" id="next" onclick="handleButton(this.id)">
+        <img src="images/playlist.png" class="button player-button" id="list" onclick="handleButton(this.id)">
       </div>
       <!-- <label for="progress-slider">P</label> -->
     </div>

@@ -1,17 +1,9 @@
 var playerButtons = document.querySelectorAll("#player-button")
 console.log(playerButtons)
 
-for (const button of playerButtons) 
-	
-	button.addEventListener("mouseover", (e) => {
+function handleButton(sender) {
 
-	//	console.log(button, e);
-
-})
-
-function handleButton(sender, id) {
-
-	var event = new CustomEvent("playerbtnclick", { detail: {sender: sender, id : id} });
+	var event = new CustomEvent("playerbtnclick", { detail: { id: id } });
 
 	window.dispatchEvent(event);
 
@@ -19,21 +11,15 @@ function handleButton(sender, id) {
 
 window.addEventListener("playerbtnclick", function(data) {
 
-	el = data.detail.sender;
-	id = data.detail.id;
 	// alert("Pressed button: " + id);
 
-	if (id == "play") {
-
-		var player = document.getElementById("player");
-
-		if (!player.paused) {
-			el.setAttribute("src", "images/play.png");
-			player.pause();
-		} else {
-			el.setAttribute("src", "images/pause.png");
-			player.play();
-		}
+	switch (data.detail.id) {
+		case "play":
+      switchPlayState();
+		break;
+		default:
+		break;
+		// TODO: add logic for playlist, thus the back and next buttons
 	}
 });
 
@@ -71,18 +57,16 @@ document.body.addEventListener('drop', function(event) {
       console.log('File size:', files[i].size, 'bytes');
     }
 
+	loadMetadata(files[0])
+		.then((data) => {
+			
+			document.getElementById("title-overlay").innerText = data.title;
+			document.getElementById("author-overlay").innerText = data.artist;
+			getCover(data.picture.data, data.picture.format)
+
+		});
+
 	playAudio(files[0]);
 
-  var meta = loadMetadata(files[0])
-  .then((data) => {
-    
-    document.getElementById("title-overlay").innerText = data.title;
-    document.getElementById("author-overlay").innerText = data.artist;
-    getCover(data.picture.data, data.picture.format)
-
-  });
-
-  playAudio(files[0]);
 });
-
 

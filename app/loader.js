@@ -12,14 +12,15 @@ function loadMetadata(file) {
 }
 
 function getCover(data, fmt) {
-    var container = Array.from(document.getElementsByClassName("cover"))[0];
+  var container = Array.from(document.getElementsByClassName("cover"))[0];
 
-    var cover = document.createElement("img")
-    var base64 = "";
+  var cover = document.createElement("img")
+  var base64 = "";
   
-    for (const el of data) base64 += String.fromCharCode(el);
+  for (const el of data) base64 += String.fromCharCode(el);
   
-    cover.src = `data:${fmt};base64,${window.btoa(base64)}`;
+  cover.src = `data:${fmt};base64,${window.btoa(base64)}`;
     
-    container.append(cover);
+  container.append(cover);
+  
 }

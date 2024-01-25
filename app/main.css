@@ -149,7 +149,7 @@ body {
     transition: opacity 0.1s, transform 0.1s;
 }
 
-#player-button {
+.player-button {
     max-width: 10%;
     min-width: 10%;
     padding: 10px;
@@ -194,7 +194,7 @@ body {
         column-gap: 5%;
     }
 
-    #player-button {
+    .player-button {
         scale: 0.8;
     }
 

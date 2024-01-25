@@ -8,8 +8,19 @@ function playAudio(file) {
     player.src = url;
 
     document.body.appendChild(player);
+    switchPlayState()
+}
 
-    console.log(player);
+function switchPlayState() {
+    var playButton = document.getElementById("play");
+    var player = document.getElementById("player");
+    if (!player.paused) {
+        playButton.setAttribute("src", "images/play.png");
+        player.pause();
+    } else {
+        playButton.setAttribute("src", "images/pause.png");
+        player.play();
+    }
 }
 
 function formatTime(s) {
