@@ -1,7 +1,7 @@
 var playerButtons = document.querySelectorAll("#player-button")
 console.log(playerButtons)
 
-function handleButton(sender) {
+function handleButton(id) {
 
 	var event = new CustomEvent("playerbtnclick", { detail: { id: id } });
 
