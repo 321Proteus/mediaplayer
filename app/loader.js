@@ -1,9 +1,7 @@
-var jsmedia = window.jsmediatags;
-
 function loadMetadata(file) {
   return new Promise(function(resolve, reject) {
 
-    jsmedia.read(file, {
+    window.jsmediatags.read(file, {
 
       onSuccess: (tag) => resolve(tag.tags),
       onError: (err) => reject(err)
