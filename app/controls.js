@@ -14,7 +14,8 @@ window.addEventListener("playerbtnclick", function(data) {
 
 	switch (data.detail.id) {
 		case "play":
-      playerState("switch");
+      if (player.src)
+        playerState("switch");
 		break;
       case "prev":
 		default:
