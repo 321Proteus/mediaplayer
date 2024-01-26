@@ -17,10 +17,20 @@ window.addEventListener("playerbtnclick", function(data) {
       if (player.src)
         playerState("switch");
 		break;
-      case "prev":
+
+    case "prev":
+      previousItem();
+    break;
+
+    case "next":
+      console.log("lol")
+      nextItem();
+    break;
+
+
 		default:
 		break;
-		// TODO: add logic for playlist, thus the back and next buttons
+		// TODO: add logic for shuffle
 	}
 });
 
@@ -46,6 +56,8 @@ function displayMetadata(songData) {
   document.getElementById("author-overlay").innerText = songData.artist;
   if (songData.picture)
     document.getElementById("cover").innerHTML = songData.picture;
+  else 
+    document.getElementById("cover").innerHTML = "<div id='cover'></div>";
 }
 
 document.body.addEventListener('dragover', function(event) {
@@ -60,6 +72,7 @@ document.body.addEventListener('drop', async function(event) {
 
 	var files = event.dataTransfer.files;
 
+
     for (let i = 0; i < files.length; i++) {
       var f = files[i];
       console.log(`${f.name} (${f.type}) ${f.size} B`);
@@ -72,8 +85,8 @@ document.body.addEventListener('drop', async function(event) {
 
     console.log(playlist)
     
-    playAudio(0)
-    displayMetadata(playlist[playlistIndex]);
+    if (!player.getAttribute("initialized"))
+      startPlaylist();
 
 });
 

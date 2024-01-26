@@ -1,9 +1,5 @@
 var player = document.getElementById("player");
 
-player.onended = function() {
-    playAudio(nextItem());
-}
-
 function playAudio(index) {
 
     player.src = playlist[index].url;
@@ -16,11 +12,6 @@ function timeLapse(percent) {
     player.currentTime = player.duration * percent / 100;
 }
 
-function refreshPlayer() {
-
-    if (player.src) player.src = "";
-
-}
 
 function playerState(mode) {
 
