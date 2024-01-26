@@ -1,5 +1,4 @@
 var playerButtons = document.querySelectorAll("#player-button")
-console.log(playerButtons)
 
 function handleButton(id) {
 
@@ -15,8 +14,9 @@ window.addEventListener("playerbtnclick", function(data) {
 
 	switch (data.detail.id) {
 		case "play":
-      switchPlayState();
+      playerState("switch");
 		break;
+      case "prev":
 		default:
 		break;
 		// TODO: add logic for playlist, thus the back and next buttons
@@ -39,6 +39,14 @@ document.getElementById("progress-slider").oninput = function() {
 	
 };
 
+function displayMetadata(songData) {
+
+  document.getElementById("title-overlay").innerText = songData.title;
+  document.getElementById("author-overlay").innerText = songData.artist;
+  if (songData.picture)
+    document.getElementById("cover").innerHTML = songData.picture;
+}
+
 document.body.addEventListener('dragover', function(event) {
     event.preventDefault();
 });
@@ -46,34 +54,25 @@ document.body.addEventListener('dragover', function(event) {
 document.body.addEventListener('dragleave', function() {
 });
 
-document.body.addEventListener('drop', function(event) {
+document.body.addEventListener('drop', async function(event) {
 	event.preventDefault();
 
 	var files = event.dataTransfer.files;
 
     for (let i = 0; i < files.length; i++) {
-      console.log('File name:', files[i].name);
-      console.log('File type:', files[i].type);
-      console.log('File size:', files[i].size, 'bytes');
+      var f = files[i];
+      console.log(`${f.name} (${f.type}) ${f.size} B`);
+
+      var songData = await generateSongData(f);
+
+      addToPlaylist(songData);
+
     }
 
-	loadMetadata(files[0])
-	.then(data => {
-
-			document.getElementById("title-overlay").innerText = data.title;
-			document.getElementById("author-overlay").innerText = data.artist;
-			getCover(data.picture.data, data.picture.format)
-
-	})
-  .catch(err => {
-
-      console.log("Error:", err.info);
-      document.getElementById("title-overlay").innerText = err.title.split('.')[0];
-      document.getElementById("author-overlay").innerText = err.artist;
-
-  });
-  refreshPlayer();
-	playAudio(files[0]);
+    console.log(playlist)
+    
+    playAudio(0)
+    displayMetadata(playlist[playlistIndex]);
 
 });
 

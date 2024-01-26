@@ -7,6 +7,7 @@
     <title>ElectronMP3</title>
 
     <script defer src="./controls.js"></script>
+    <script defer src="./playlist.js"></script>
     <script defer src="./player.js"></script>
     <script defer src="./loader.js"></script>
 
@@ -35,7 +36,8 @@
     </div>
 
     <div class="player-container">
-      <div class="cover"></div>  
+      <audio style="display: none;" id="player" ontimeupdate="getSongTime(this)"></audio>
+      <div id="cover"></div>  
     </div>
 
     <div class="player-controls">

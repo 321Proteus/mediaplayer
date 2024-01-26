@@ -1,35 +1,56 @@
-function playAudio(file) {
-    player = document.createElement("audio");
+var player = document.getElementById("player");
 
-    player.setAttribute("ontimeupdate", "getSongTime(this)");
-    player.id = "player";
+player.onended = function() {
+    playAudio(nextItem());
+}
 
-    var url = URL.createObjectURL(file);
-    player.src = url;
+function playAudio(index) {
 
-    document.body.appendChild(player);
-    switchPlayState()
+    player.src = playlist[index].url;
+    playerState("play");
+
+}
+
+function timeLapse(percent) {
+
+    player.currentTime = player.duration * percent / 100;
 }
 
 function refreshPlayer() {
-    var player = document.getElementById("player");
 
-    if (player) player.remove();
+    if (player.src) player.src = "";
+
 }
 
-function switchPlayState() {
+function playerState(mode) {
+
     var playButton = document.getElementById("play");
-    var player = document.getElementById("player");
-    if (!player.paused) {
-        playButton.setAttribute("src", "images/play.png");
-        player.pause();
-    } else {
-        playButton.setAttribute("src", "images/pause.png");
-        player.play();
+    
+    switch (mode) {
+        case "play":
+            playButton.setAttribute("src", "images/pause.png");
+            player.play();
+            break;
+        case "stop":
+            playButton.setAttribute("src", "images/play.png");
+            player.pause();
+            break;
+        default: // "switch"
+            if (!player.paused) {
+                playButton.setAttribute("src", "images/play.png");
+                player.pause();
+            } else {
+                playButton.setAttribute("src", "images/pause.png");
+                player.play();
+            }
+            break;
     }
+
 }
+
 
 function formatTime(s) {
+
     var h = Math.floor(s / 3600);
     var m = Math.floor((s - 3600 * h) / 60);
     var _s = Math.floor(s - 3600 * h - 60 * m);

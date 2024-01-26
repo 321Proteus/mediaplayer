@@ -6,25 +6,43 @@ function loadMetadata(file) {
     jsmedia.read(file, {
 
       onSuccess: (tag) => resolve(tag.tags),
-      onError: (err) => {
-        err.title = file.name;
-        err.artist = "Unknown";
-        reject(err);
-      }
+      onError: (err) => reject(err)
     });
   });
 }
 
 function getCover(data, fmt) {
-  var container = Array.from(document.getElementsByClassName("cover"))[0];
 
-  var cover = document.createElement("img")
   var base64 = "";
   
   for (const el of data) base64 += String.fromCharCode(el);
-  
-  cover.src = `data:${fmt};base64,${window.btoa(base64)}`;
+  var cover = `data:${fmt};base64,${window.btoa(base64)}`;
     
-  container.append(cover);
+  return `<img src=${cover}>`;
 
+}
+
+async function generateSongData(file) {
+
+  var url = URL.createObjectURL(file);
+
+  var songData = {};
+
+  songData.url = url;
+
+  try {
+    var data = await loadMetadata(file);
+    
+    songData.title = data.title;
+    songData.artist = data.artist;
+    songData.picture = getCover(data.picture.data, data.picture.format);
+
+  } catch (err) {
+
+    songData.title = file.name.split('.')[0];
+    songData.artist = "Unknown";
+    songData.picture = null;
+  }
+
+  return songData;
 }
