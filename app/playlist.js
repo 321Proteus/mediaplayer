@@ -27,7 +27,7 @@ player.onended = () => {
 }
 
 function nextItem() {
-    return (playlistIndex + 1 < playlist.length) ? playlistIndex+1 : -1;
+    return (playlistIndex + 1 < playlist.length) ? playlistIndex+1 : playlist.length - 1;
 }
 
 
