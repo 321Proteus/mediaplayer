@@ -19,12 +19,15 @@ window.addEventListener("playerbtnclick", function(data) {
 		break;
 
     case "prev":
-      previousItem();
+      playlistIndex = previousItem();
+      playAudio(playlistIndex);
+      displayMetadata(playlist[playlistIndex]);
     break;
 
     case "next":
-      console.log("lol")
-      nextItem();
+      playlistIndex = nextItem();
+      playAudio(playlistIndex);
+      displayMetadata(playlist[playlistIndex]);
     break;
 
 
