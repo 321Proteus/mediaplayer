@@ -75,12 +75,14 @@ function displayPlaylist() {
     }
 
     var textData = document.createElement("div");
+    textData.classList.add("playlist-text");
 
-    item.innerHTML += `<div class="playlist-title">${itemData.title}</div>`;
-    item.innerHTML += `<div class="playlist-artist">${itemData.artist}</div>`;
+
+
+    textData.innerHTML += `<div class="playlist-title">${itemData.title}</div>`;
+    textData.innerHTML += `<div class="playlist-artist">${itemData.artist}</div>`;
 
     item.appendChild(textData);
-
     item.childNodes[0].classList.add("playlist-thumbnail")
     console.log(item)
 

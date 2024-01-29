@@ -126,13 +126,23 @@ body {
 
 .playlist-text {
     flex: 80%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .playlist-title {
+    font-size: 6vw;
+    font-family: "Comic Sans MS", sans-serif;
     flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .playlist-artist {
+    font-size: 4vw;
+    font-family: "Comic Sans MS", sans-serif;
+    color: gray;
     flex: 20%;
 }
 
