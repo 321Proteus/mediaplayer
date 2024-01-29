@@ -89,7 +89,6 @@ function displayPlaylist() {
 
     item.appendChild(textData);
     item.childNodes[0].classList.add("playlist-thumbnail")
-    console.log(item)
 
   }
 }
