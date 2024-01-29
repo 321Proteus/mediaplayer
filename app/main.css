@@ -135,7 +135,6 @@ body {
 
 .playlist-item {
     display: flex;
-    max-height: 80px;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
@@ -290,10 +289,6 @@ body {
 
 @media (min-aspect-ratio: 1/1) {
 
-    .title-container {
-        flex: 1;
-    }
-
     #app-title {
         font-size: 64px;
     }
@@ -302,7 +297,7 @@ body {
         padding: 0;
     }
 
-    .cover {
+    #cover {
         margin: 0;
         width: 30%;
         max-width: 500px;

@@ -39,6 +39,10 @@ window.addEventListener("playerbtnclick", function(data) {
       modal("playlist");
     break;
 
+    case "shuffle":
+      shuffle();
+      displayPlaylist();
+
 		default:
 		break;
 		// TODO: add logic for shuffle
@@ -62,15 +66,20 @@ document.getElementById("progress-slider").oninput = function() {
 };
 
 function displayPlaylist() {
+
+  var container = document.getElementById("playlist");
+
+  container.innerHTML = "";
+
   for (let i = 0; i < playlist.length; i++) {
 
-    var container = document.getElementById("playlist");
+
     var item = document.createElement("div");
 
     var itemData = playlist[i];
 
     item.classList.add("playlist-item");
-    container.append(item)    
+    container.append(item)
 
     if (itemData.picture) item.innerHTML += itemData.picture;
     else {
@@ -153,7 +162,7 @@ async function modal(id) {
       
   container.innerHTML = content;
 
-  displayPlaylist(2);
+  displayPlaylist();
 
   document.getElementById("modal-exit").onclick = function() {
     overlay.style.animation = "none";
