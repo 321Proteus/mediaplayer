@@ -96,28 +96,24 @@ document.body.addEventListener('drop', async function(event) {
 
 });
 
-function modal(id) {
+async function modal(id) {
 
   var container = document.getElementById("modal-container")
 
   document.getElementById("overlay").style.display = "flex";
   document.getElementById("overlay").style.animation = "overlay 0.3s linear 1 forwards";
-        
-  fetch(`./modal/${id}.html`)
-  .then(response => response.text())
-  .then(content => {
       
-      var container = document.getElementById("modal-container")
-      container.innerHTML = content;
+  var response = await fetch(`./modal/${id}.html`);
+  var content = await response.text()
+      
+  var container = document.getElementById("modal-container")
+  container.innerHTML = content;
 
-      document.getElementById("modal-exit").onclick = function() {
-        document.getElementById("overlay").style.animation = "none";
-        container.innerHTML = "";
-      }
+  document.getElementById("modal-exit").onclick = function() {
+    document.getElementById("overlay").style.animation = "none";
+    container.innerHTML = "";
+  }
 
-      console.log(container)
-  })
-  .catch(err => console.error(err));
 
 }
 
