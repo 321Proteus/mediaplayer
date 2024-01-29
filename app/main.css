@@ -34,7 +34,6 @@ body {
 }
 
 #modal-title {
-
     font-size: 4vw;
     color: rgb(105, 179, 115);
     font-family: "Comic Sans MS", sans-serif;
@@ -117,8 +116,39 @@ body {
     aspect-ratio: 1/1;
 }
 
-#cover-image {
-    max-width: 100%;
+.playlist-item {
+    display: flex;
+    max-height: 80px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.playlist-text {
+    flex: 80%;
+}
+
+.playlist-title {
+    flex: 1;
+}
+
+.playlist-artist {
+    flex: 20%;
+}
+
+.playlist-thumbnail {
+    flex: 40%;
+    max-width: 20%;
+    aspect-ratio: 1/1;
+    padding: 10px;
+    border-radius: 16px;
+}
+
+.fallback-thumbnail {
+    background-color: rgb(191, 233, 196);
+    border-radius: 8px;
+
+    scale: 0.8;
 }
 
 .player-controls {

@@ -56,12 +56,47 @@ document.getElementById("progress-slider").oninput = function() {
 	
 };
 
+function displayPlaylist() {
+  for (let i = 0; i < playlist.length; i++) {
+
+    var container = document.getElementById("playlist");
+    var item = document.createElement("div");
+
+    var itemData = playlist[i];
+
+    item.classList.add("playlist-item");
+    container.append(item)    
+
+    if (itemData.picture) item.innerHTML += itemData.picture;
+    else {
+      var fallbackImage = document.createElement("div");
+      fallbackImage.classList.add("fallback-thumbnail");
+      item.appendChild(fallbackImage);
+    }
+
+    var textData = document.createElement("div");
+
+    item.innerHTML += `<div class="playlist-title">${itemData.title}</div>`;
+    item.innerHTML += `<div class="playlist-artist">${itemData.artist}</div>`;
+
+    item.appendChild(textData);
+
+    item.childNodes[0].classList.add("playlist-thumbnail")
+    console.log(item)
+
+  }
+}
+
 function displayMetadata(songData) {
 
   document.getElementById("title-overlay").innerText = songData.title;
   document.getElementById("author-overlay").innerText = songData.artist;
-  if (songData.picture)
-    document.getElementById("cover").innerHTML = songData.picture;
+  if (songData.picture) {
+    var cover = document.getElementById("cover");
+    cover.innerHTML = songData.picture;
+    cover.childNodes[0].style.maxWidth = "100%";
+  }
+
   else 
     document.getElementById("cover").innerHTML = "<div id='cover'></div>";
 }
@@ -83,9 +118,12 @@ document.body.addEventListener('drop', async function(event) {
       var f = files[i];
       console.log(`${f.name} (${f.type}) ${f.size} B`);
 
+      if (f.type.startsWith("audio")) {
       var songData = await generateSongData(f);
 
-      addToPlaylist(songData);
+      addToPlaylist(songData);        
+      }
+
 
     }
 
@@ -108,6 +146,8 @@ async function modal(id) {
   var content = await response.text()
       
   container.innerHTML = content;
+
+  displayPlaylist(2);
 
   document.getElementById("modal-exit").onclick = function() {
     overlay.style.animation = "none";
