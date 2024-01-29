@@ -21,8 +21,10 @@ player.onended = () => {
     if (playMode == 0) removeFromPlaylist(playlistIndex)
     else playlistIndex++;
 
-    displayMetadata(playlist[playlistIndex])
-    playAudio(playlistIndex);
+    if (playlistIndex < playlist.length) {
+        displayMetadata(playlist[playlistIndex])
+        playAudio(playlistIndex);        
+    }
 
 }
 
