@@ -1,13 +1,18 @@
 # mediaplayer
-Welcome to SIMP - Simple yet Intelligent Media Player!
-You can use it both as a desktop application (using Electron) and as a browser page.
+
+IQPlayer is an online audio player. You can use it by your browser or build to your OS binary using Electron.
+
+Drag and drop files to play.
+The newest version 0.5 introduced playlists.
+
+To use on your machine, clone the repository and run a live server or use `npm start` to build the electron app.
 
 To do:
 
-- ~~Fix the progress bar so sliding it changes the sone time~~ done
+- Fix scrollbar color flicker when scrolling with active song
 
-- ~~Add WAV, OGG support (SIMP only reads MP3 so far)~~ turned out that it actually does :)
-- Add playlist logic (shuffle, next/previous song etc.)
-- Add ability to parse ID3 tags from file (e.g. to display cover image)
+- Add a settings page to configure player behaviour (e.g the position of new playlist elements - start or end?)
 
-  Feel free to contribute!
+- Implement array shuffling (the code is done, it just needs to be placed in the playlist modal)
+
+- Implement song/playlist looping
