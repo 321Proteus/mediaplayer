@@ -99,18 +99,19 @@ document.body.addEventListener('drop', async function(event) {
 async function modal(id) {
 
   var container = document.getElementById("modal-container")
-
-  document.getElementById("overlay").style.display = "flex";
-  document.getElementById("overlay").style.animation = "overlay 0.3s linear 1 forwards";
+  var overlay = document.getElementById("overlay")
+  
+  overlay.style.display = "flex";
+  overlay.style.animation = "overlay 0.3s linear 1 forwards";
       
   var response = await fetch(`./modal/${id}.html`);
   var content = await response.text()
       
-  var container = document.getElementById("modal-container")
   container.innerHTML = content;
 
   document.getElementById("modal-exit").onclick = function() {
-    document.getElementById("overlay").style.animation = "none";
+    overlay.style.animation = "none";
+    overlay.style.display = "none";
     container.innerHTML = "";
   }
 
