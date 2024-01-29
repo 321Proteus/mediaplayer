@@ -20,14 +20,19 @@ window.addEventListener("playerbtnclick", function(data) {
 
     case "prev":
       playlistIndex = previousItem();
-      playAudio(playlistIndex);
-      displayMetadata(playlist[playlistIndex]);
+      if (typeof playlistIndex != "object") {
+        playAudio(playlistIndex);
+        displayMetadata(playlist[playlistIndex]);        
+      }
+
     break;
 
     case "next":
       playlistIndex = nextItem();
-      playAudio(playlistIndex);
-      displayMetadata(playlist[playlistIndex]);
+      if (typeof playlistIndex != "object") {
+        playAudio(playlistIndex);
+        displayMetadata(playlist[playlistIndex]);        
+      }
     break;
 
     case "list":

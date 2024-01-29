@@ -27,12 +27,14 @@ player.onended = () => {
 }
 
 function nextItem() {
+    if (!playlist.length) return new Error;
     return (playlistIndex + 1 < playlist.length) ? playlistIndex+1 : playlist.length - 1;
 }
 
 
 function previousItem() {
-    return (playlistIndex - 1 >= 0) ? playlistIndex-1 : 0;
+    if (!playlist.length) return new Error;
+    return (playlistIndex - 1 > 0) ? playlistIndex-1 : 0;
 }
 
 function startPlaylist() {
