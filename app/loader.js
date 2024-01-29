@@ -16,7 +16,7 @@ function getCover(data, fmt) {
   for (const el of data) base64 += String.fromCharCode(el);
   var cover = `data:${fmt};base64,${window.btoa(base64)}`;
     
-  return `<img src=${cover}>`;
+  return `<img id="cover-image" src=${cover}>`;
 
 }
 
