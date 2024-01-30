@@ -1,12 +1,13 @@
 var playlist = [];
 var playlistIndex = 0;
 
-var playMode = 1; // Should the played item be deleted from playlist of left?
-var alignMode = 1; // Should new items be added to the front or back of the playlist?
+var loopState = 0; // 0 - no loop, 1 - loop playlist, 2 - loop single song
+
+var alignMode = true; // Should new items be added to the front or back of the playlist?
 
 function addToPlaylist(item) {
 
-    if (alignMode == 1)
+    if (alignMode == true)
         playlist.push(item);
     else
         playlist = playlist.concat(item);
@@ -18,13 +19,23 @@ function removeFromPlaylist(index) {
 
 player.onended = () => {
 
-    if (playMode == 0) removeFromPlaylist(playlistIndex)
-    else playlistIndex++;
+    console.log(loopState)
 
-    if (playlistIndex < playlist.length) {
-        displayMetadata(playlist[playlistIndex])
-        playAudio(playlistIndex);        
+    if (loopState != 2) {
+
+        if (playlistIndex < playlist.length) {
+            playlistIndex++;
+    
+        }
+        else {
+
+            if (loopState == 1) playlistIndex = 0;
+
+        }
     }
+
+    displayMetadata(playlist[playlistIndex])
+    playAudio(playlistIndex);   
 
 }
 
@@ -50,5 +61,9 @@ function shuffle() {
       const j = Math.floor(Math.random() * (i + 1));
       [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
     }
-  }
+}
+
+function swapItems(i, j) {
+    [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
+}
   

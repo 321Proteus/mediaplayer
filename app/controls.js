@@ -8,7 +8,7 @@ function handleButton(id) {
 
 }
 
-window.addEventListener("playerbtnclick", function(data) {
+window.addEventListener("playerbtnclick", data => {
 
 	// alert("Pressed button: " + id);
 
@@ -39,13 +39,24 @@ window.addEventListener("playerbtnclick", function(data) {
       modal("playlist");
     break;
 
+    case "loop":
+
+      var loopButton = document.getElementById("loop");
+      loopState = ++loopState % 3;
+
+      switch (loopState) {
+        case 0: loopButton.src = "images/noloop.png"; break;
+        case 1: loopButton.src = "images/loop.png"; break;
+        case 2: loopButton.src = "images/loopone.png"; break;
+      }
+    break;
+
     case "shuffle":
       shuffle();
       displayPlaylist();
 
 		default:
 		break;
-		// TODO: add logic for shuffle
 	}
 });
 
@@ -116,36 +127,36 @@ function displayMetadata(songData) {
     document.getElementById("cover").innerHTML = "<div id='cover'></div>";
 }
 
-document.body.addEventListener('dragover', function(event) {
-    event.preventDefault();
+document.body.addEventListener('dragover', e => {
+    e.preventDefault();
 });
 
-document.body.addEventListener('dragleave', function() {
+document.body.addEventListener('dragleave', () => {
 });
 
-document.body.addEventListener('drop', async function(event) {
-	event.preventDefault();
+document.body.addEventListener('drop', async e => {
+	e.preventDefault();
 
-	var files = event.dataTransfer.files;
+	var files = e.dataTransfer.files;
 
 
-    for (let i = 0; i < files.length; i++) {
-      var f = files[i];
-      console.log(`${f.name} (${f.type}) ${f.size} B`);
+  for (let i = 0; i < files.length; i++) {
+    var f = files[i];
+    console.log(`${f.name} (${f.type}) ${f.size} B`);
 
-      if (f.type.startsWith("audio")) {
+    if (f.type.startsWith("audio")) {
       var songData = await generateSongData(f);
 
       addToPlaylist(songData);        
-      }
-
-
     }
 
-    console.log(playlist)
+
+  }
+
+  console.log(playlist)
     
-    if (!player.getAttribute("initialized"))
-      startPlaylist();
+  if (!player.getAttribute("initialized"))
+    startPlaylist();
 
 });
 
