@@ -19,20 +19,11 @@ window.addEventListener("playerbtnclick", data => {
 		break;
 
     case "prev":
-      playlistIndex = previousItem();
-      if (typeof playlistIndex != "object") {
-        playAudio(playlistIndex);
-        displayMetadata(playlist[playlistIndex]);        
-      }
-
+      previousItem();
     break;
 
     case "next":
-      playlistIndex = nextItem();
-      if (typeof playlistIndex != "object") {
-        playAudio(playlistIndex);
-        displayMetadata(playlist[playlistIndex]);        
-      }
+      nextItem();
     break;
 
     case "list":
@@ -115,16 +106,29 @@ function displayPlaylist() {
 
 function displayMetadata(songData) {
 
-  document.getElementById("title-overlay").innerText = songData.title;
-  document.getElementById("author-overlay").innerText = songData.artist;
-  if (songData.picture) {
-    var cover = document.getElementById("cover");
-    cover.innerHTML = songData.picture;
-    cover.childNodes[0].style.maxWidth = "100%";
+  if (songData) {
+
+    document.getElementById("title-overlay").innerText = songData.title;
+    document.getElementById("author-overlay").innerText = songData.artist;
+
+    if (songData.picture) {
+      var cover = document.getElementById("cover");
+      cover.innerHTML = songData.picture;
+      cover.childNodes[0].style.maxWidth = "100%";
+    }
+    else {
+      document.getElementById("cover").innerHTML = "<div id='cover'></div>";          
+    }
+
+  } else { // Playlist end metadata (return to default)
+    document.getElementById("title-overlay").innerText = "Song Title";
+    document.getElementById("author-overlay").innerText = "Artitst Title";
+    document.getElementById("cover").innerHTML = "<div id='cover'></div>";
+
+    document.getElementById("song-time").innerHTML = "-:--";
+    document.getElementById("song-duration").innerHTML = "-:--";
   }
 
-  else 
-    document.getElementById("cover").innerHTML = "<div id='cover'></div>";
 }
 
 document.body.addEventListener('dragover', e => {

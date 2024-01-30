@@ -17,21 +17,24 @@ function removeFromPlaylist(index) {
     playlist.splice(index, 1);
 }
 
-player.onended = () => {
+player.onended = nextItem();
+
+function nextItem() {
+
+    if (!playlist.length) { console.error("Playlist is empty"); return; };
 
     console.log(loopState)
 
-    if (loopState != 2) {
+    var passCondition = playlistIndex < playlist.length - 1;
 
-        if (playlistIndex < playlist.length) {
-            playlistIndex++;
-    
-        }
-        else {
-
-            if (loopState == 1) playlistIndex = 0;
-
-        }
+    switch (loopState) {
+        case 0: if (passCondition) playlistIndex++;
+                else playlistIndex = playlist.length - 1;
+        break;
+        case 1: if (passCondition) playlistIndex++;
+                else playlistIndex = 0;
+        break;
+        case 2: playlistIndex = playlistIndex;
     }
 
     displayMetadata(playlist[playlistIndex])
@@ -39,15 +42,15 @@ player.onended = () => {
 
 }
 
-function nextItem() {
-    if (!playlist.length) return new Error;
-    return (playlistIndex + 1 < playlist.length) ? playlistIndex+1 : playlist.length - 1;
-}
-
-
 function previousItem() {
-    if (!playlist.length) return new Error;
-    return (playlistIndex - 1 > 0) ? playlistIndex-1 : 0;
+    if (!playlist.length) { console.error("Playlist is empty"); return; }
+
+    if (playlistIndex - 1 > 0) playlistIndex--;
+    else playlistIndex = 0;
+
+    displayMetadata(playlist[playlistIndex])
+    playAudio(playlistIndex);   
+    
 }
 
 function startPlaylist() {
