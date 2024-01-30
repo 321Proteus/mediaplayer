@@ -70,13 +70,14 @@ document.getElementById("progress-slider").oninput = function() {
 function displayPlaylist() {
 
   var container = document.getElementById("playlist");
-
   container.innerHTML = "";
 
   for (let i = 0; i < playlist.length; i++) {
 
 
     var item = document.createElement("div");
+    item.setAttribute("order", i);
+    item.setAttribute("draggable", true);
 
     var itemData = playlist[i];
 
@@ -93,8 +94,6 @@ function displayPlaylist() {
     var textData = document.createElement("div");
     textData.classList.add("playlist-text");
 
-
-
     textData.innerHTML += `<div class="playlist-title">${itemData.title}</div>`;
     textData.innerHTML += `<div class="playlist-artist">${itemData.artist}</div>`;
 
@@ -102,6 +101,8 @@ function displayPlaylist() {
     item.childNodes[0].classList.add("playlist-thumbnail")
 
   }
+
+  dragAndDrop();
 }
 
 function displayMetadata(songData) {
@@ -131,14 +132,14 @@ function displayMetadata(songData) {
 
 }
 
-document.body.addEventListener('dragover', e => {
+document.body.addEventListener("dragover", e => {
     e.preventDefault();
 });
 
-document.body.addEventListener('dragleave', () => {
+document.body.addEventListener("dragleave", () => {
 });
 
-document.body.addEventListener('drop', async e => {
+document.body.addEventListener("drop", async e => {
 	e.preventDefault();
 
 	var files = e.dataTransfer.files;

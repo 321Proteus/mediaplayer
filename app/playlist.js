@@ -69,4 +69,85 @@ function shuffle() {
 function swapItems(i, j) {
     [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
 }
+
+// Drag and Drop system controls
+
+function dragAndDrop() {
+
+    const container = document.getElementById("playlist");
+
+    let draggedItem = null;
+    let placeholder = null;
+    let swapItem = null;
+    
+    var arr = [];
+    
+    
+    function calculate() {
+    
+      var list = document.getElementById("playlist").children;
+      for (let i=0;i<list.length;i++) {
+        arr[i] = parseInt(list[i].getAttribute("o")) + 1;
+      }
+      console.log(arr)
+    }
+    
+    
+    container.addEventListener("dragstart", e => {
+    
+        draggedItem = e.target.closest(".playlist-item");
+
+        placeholder = document.createElement("div");
+        placeholder.classList.add("placeholder");
+        placeholder.innerHTML += "<div class='playlist-thumbnail'></div>"
+
+        container.insertBefore(placeholder, draggedItem);
+    
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", null);
+        placeholder.style.display = "flex";
+    });
+    
+    container.addEventListener("dragover", e => {
+        console.log(e)        
+        e.preventDefault();
+    
+        if (draggedItem === null) return;
   
+        draggedItem.style.display = "none";
+        const boundingBox = e.target.getBoundingClientRect();
+        const mouseY = e.clientY;
+      
+        const isAbove = mouseY < boundingBox.top + boundingBox.height / 2;
+        
+        var parent = e.target.closest(".playlist-item")
+        if (parent.parentNode != document.body) {
+          if (isAbove) {
+            container.insertBefore(placeholder, parent);
+          } else {
+            container.insertBefore(placeholder, parent.nextSibling);
+          }    
+        }  
+    });
+    
+    container.addEventListener("dragend", () => {
+    
+        draggedItem.style.display = "flex";
+      
+        if (draggedItem !== null) {
+          if (placeholder && placeholder.parentNode == container)
+            container.removeChild(placeholder);
+      
+          draggedItem = null;
+          placeholder = null;
+        }
+    });
+    
+    container.addEventListener("drop", e => {
+    
+        e.preventDefault();
+        if (placeholder !== null) {
+          container.replaceChild(draggedItem, placeholder);
+        }  
+    });
+}

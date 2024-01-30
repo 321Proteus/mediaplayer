@@ -132,12 +132,18 @@ body {
     width: 80%;
     aspect-ratio: 1/1;
 }
+  
+.placeholder {
+    background-color: #eee;
+    max-height: 100%;
+}
 
 .playlist-item {
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+    cursor: grab;
 }
 
 .playlist-text {
