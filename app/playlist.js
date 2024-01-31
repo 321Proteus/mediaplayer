@@ -102,8 +102,7 @@ function dragAndDrop() {
     
     container.addEventListener("dragstart", e => {
     
-        e.target = "szkibidibi";
-        draggedItem = e.target.closest(".playlist-item");
+        draggedItem = e.target;
         console.log(draggedItem)
 
         placeholder = document.createElement("div");
