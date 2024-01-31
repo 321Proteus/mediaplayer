@@ -17,26 +17,14 @@ function playerState(mode) {
 
     var playButton = document.getElementById("play");
     
-    switch (mode) {
-        case "play":
-            playButton.setAttribute("src", "images/pause.png");
-            player.play();
-            break;
-        case "stop":
-            playButton.setAttribute("src", "images/play.png");
-            player.pause();
-            break;
-        default: // "switch"
-            if (!player.paused) {
-                playButton.setAttribute("src", "images/play.png");
-                player.pause();
-            } else {
-                playButton.setAttribute("src", "images/pause.png");
-                player.play();
-            }
-            break;
+    if (mode == "play" || (mode == "switch" && player.paused)) {
+        playButton.src = "images/pause.png";
+        player.play();
     }
-
+    else {
+        playButton.src = "images/play.png";
+        player.pause();        
+    }
 }
 
 
