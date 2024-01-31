@@ -23,7 +23,7 @@ window.addEventListener("playerbtnclick", data => {
     break;
 
     case "next":
-      nextItem(true);
+      nextItem(true); // Override loops
     break;
 
     case "list":
@@ -44,7 +44,7 @@ window.addEventListener("playerbtnclick", data => {
 
     case "shuffle":
       shuffle();
-      displayPlaylist();
+      displayPlaylist(true); // Ignore Drag and Drop events
 
 		default:
 		break;
@@ -67,7 +67,7 @@ document.getElementById("progress-slider").oninput = function() {
 	
 };
 
-function displayPlaylist() {
+function displayPlaylist(eventMode) {
 
   var container = document.getElementById("playlist");
   container.innerHTML = "";
@@ -102,7 +102,7 @@ function displayPlaylist() {
 
   }
 
-  dragAndDrop();
+  if (!eventMode) dragAndDrop();
 }
 
 function displayMetadata(songData) {

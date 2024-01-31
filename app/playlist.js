@@ -29,7 +29,7 @@ function nextItem(force) {
       playAudio(playlistIndex);
       return;
     }
-    
+
     var passCondition = playlistIndex < playlist.length - 1;
 
     switch (loopState) {
@@ -102,11 +102,12 @@ function dragAndDrop() {
     
     container.addEventListener("dragstart", e => {
     
-        draggedItem = e.target//.closest(".playlist-item");
+        e.target = "szkibidibi";
+        draggedItem = e.target.closest(".playlist-item");
+        console.log(draggedItem)
 
         placeholder = document.createElement("div");
         placeholder.classList.add("placeholder");
-
 
         container.insertBefore(placeholder, draggedItem);
     
@@ -128,7 +129,7 @@ function dragAndDrop() {
         const isAbove = mouseY < boundingBox.top + boundingBox.height / 2;
         
         var parent = e.target.closest(".playlist-item")
-        console.log(parent)
+        //console.log(parent)
         if (parent != null) {
           if (isAbove) {
             container.insertBefore(placeholder, parent);
