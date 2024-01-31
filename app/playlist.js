@@ -95,21 +95,21 @@ function dragAndDrop() {
     
     container.addEventListener("dragstart", e => {
     
-        draggedItem = e.target.closest(".playlist-item");
+        draggedItem = e.target//.closest(".playlist-item");
 
         placeholder = document.createElement("div");
         placeholder.classList.add("placeholder");
-        placeholder.innerHTML += "<div class='playlist-thumbnail'></div>"
+
 
         container.insertBefore(placeholder, draggedItem);
     
         e.dataTransfer.effectAllowed = "move";
         e.dataTransfer.setData("text/plain", null);
+        // placeholder.innerHTML += "<div class='playlist-thumbnail'></div>"
         placeholder.style.display = "flex";
     });
     
     container.addEventListener("dragover", e => {
-        console.log(e)        
         e.preventDefault();
     
         if (draggedItem === null) return;
@@ -121,13 +121,15 @@ function dragAndDrop() {
         const isAbove = mouseY < boundingBox.top + boundingBox.height / 2;
         
         var parent = e.target.closest(".playlist-item")
-        if (parent.parentNode != document.body) {
+        console.log(parent)
+        if (parent != null) {
           if (isAbove) {
             container.insertBefore(placeholder, parent);
           } else {
             container.insertBefore(placeholder, parent.nextSibling);
           }    
         }  
+        // placeholder.innerHTML += "<div class='playlist-thumbnail'></div>"
     });
     
     container.addEventListener("dragend", () => {
