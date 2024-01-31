@@ -73,9 +73,6 @@ function shuffle() {
     }
 }
 
-function swapItems(i, j) {
-    [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
-}
 
 // Drag and Drop system controls
 
@@ -85,35 +82,21 @@ function dragAndDrop() {
 
     let draggedItem = null;
     let placeholder = null;
-    let swapItem = null;
-    
-    var arr = [];
-    
-    
-    function calculate() {
-    
-      var list = document.getElementById("playlist").children;
-      for (let i=0;i<list.length;i++) {
-        arr[i] = parseInt(list[i].getAttribute("o")) + 1;
-      }
-      console.log(arr)
-    }
-    
     
     container.addEventListener("dragstart", e => {
     
         draggedItem = e.target;
-        console.log(draggedItem)
 
         placeholder = document.createElement("div");
         placeholder.classList.add("placeholder");
+        // placeholder.innerHTML += "<div draggable='true' class='playlist-thumbnail'></div>"
 
         container.insertBefore(placeholder, draggedItem);
     
         e.dataTransfer.effectAllowed = "move";
         e.dataTransfer.setData("text/plain", null);
-        // placeholder.innerHTML += "<div class='playlist-thumbnail'></div>"
-        placeholder.style.display = "flex";
+
+        draggedItem.style.display = "flex";     
     });
     
     container.addEventListener("dragover", e => {
@@ -126,17 +109,13 @@ function dragAndDrop() {
         const mouseY = e.clientY;
       
         const isAbove = mouseY < boundingBox.top + boundingBox.height / 2;
-        
+        placeholder.innerHTML = "<div class='playlist-thumbnail'></div>"       
+
         var parent = e.target.closest(".playlist-item")
-        //console.log(parent)
-        if (parent != null) {
-          if (isAbove) {
-            container.insertBefore(placeholder, parent);
-          } else {
-            container.insertBefore(placeholder, parent.nextSibling);
-          }    
-        }  
-        // placeholder.innerHTML += "<div class='playlist-thumbnail'></div>"
+        if (parent) {
+          if (isAbove) container.insertBefore(placeholder, parent);
+          else container.insertBefore(placeholder, parent.nextSibling);             
+        }
     });
     
     container.addEventListener("dragend", () => {
@@ -157,6 +136,7 @@ function dragAndDrop() {
         e.preventDefault();
         if (placeholder !== null) {
           container.replaceChild(draggedItem, placeholder);
-        }  
+        }
+
     });
 }

@@ -93,6 +93,7 @@ function displayPlaylist(eventMode) {
 
     var textData = document.createElement("div");
     textData.classList.add("playlist-text");
+    textData.setAttribute("ondragover", "return false");
 
     textData.innerHTML += `<div class="playlist-title">${itemData.title}</div>`;
     textData.innerHTML += `<div class="playlist-artist">${itemData.artist}</div>`;
