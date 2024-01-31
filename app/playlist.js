@@ -17,22 +17,29 @@ function removeFromPlaylist(index) {
     playlist.splice(index, 1);
 }
 
-player.onended = nextItem();
+player.onended = () => nextItem(false);
 
-function nextItem() {
+function nextItem(force) {
 
-    if (!playlist.length) { console.error("Playlist is empty"); return; };
+    if (!playlist.length) { console.error("Playlist is empty"); return; };  
 
-    console.log(loopState)
-
+    if (force) { // Force update playlist index and override looping
+      playlistIndex++;
+      displayMetadata(playlist[playlistIndex])
+      playAudio(playlistIndex);
+      return;
+    }
+    
     var passCondition = playlistIndex < playlist.length - 1;
 
     switch (loopState) {
-        case 0: if (passCondition) playlistIndex++;
-                else playlistIndex = playlist.length - 1;
+        case 0: 
+          if (passCondition) playlistIndex++;
+          else playlistIndex = playlist.length - 1;
         break;
-        case 1: if (passCondition) playlistIndex++;
-                else playlistIndex = 0;
+        case 1: 
+          if (passCondition) playlistIndex++;
+          else playlistIndex = 0;
         break;
         case 2: playlistIndex = playlistIndex;
     }

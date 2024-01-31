@@ -23,7 +23,7 @@ window.addEventListener("playerbtnclick", data => {
     break;
 
     case "next":
-      nextItem();
+      nextItem(true);
     break;
 
     case "list":
