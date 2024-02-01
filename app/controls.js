@@ -181,7 +181,7 @@ async function modal(id) {
 
   displayPlaylist();
 
-  document.getElementById("modal-exit").onclick = function() {
+  document.getElementById("close").onclick = function() {
     overlay.style.animation = "none";
     overlay.style.display = "none";
     container.innerHTML = "";
