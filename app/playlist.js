@@ -23,14 +23,14 @@ function nextItem(force) {
 
     if (!playlist.length) { console.error("Playlist is empty"); return; };  
 
+    var passCondition = playlistIndex < playlist.length - 1;    
+
     if (force) { // Force update playlist index and override looping
-      playlistIndex++;
+      if (passCondition) playlistIndex++;
       displayMetadata(playlist[playlistIndex])
       playAudio(playlistIndex);
       return;
     }
-
-    var passCondition = playlistIndex < playlist.length - 1;
 
     switch (loopState) {
         case 0: 

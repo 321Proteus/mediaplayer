@@ -3,6 +3,8 @@ var player = document.getElementById("player");
 function playAudio(index) {
 
     player.src = playlist[index].url;
+    player.currentTime = 0;
+
     playerState("play");
 
 }
