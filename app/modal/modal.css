@@ -125,3 +125,25 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(26px);
 }
+
+.textbox {
+    font-family: 'Comic Sans MS', sans-serif;
+
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    height: 3rem;
+    width: 50%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    float: right;
+}
+
+#color-info {
+    display: inline;
+    text-shadow: 1px 0 black, -1px 0 black, 0 1px black, 0 -1px black;
+    color: var(--accent);
+}
+

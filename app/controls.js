@@ -209,12 +209,14 @@ async function modal(id) {
   container.innerHTML = content;
 
   if (id == "playlist") displayPlaylist();
+  else colorScanner();
 
   document.getElementById("close").onclick = function() {
     overlay.style.animation = "none";
     overlay.style.display = "none";
     container.innerHTML = "";
   }
+
 
 
 }
