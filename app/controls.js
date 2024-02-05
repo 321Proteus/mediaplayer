@@ -45,7 +45,12 @@ window.addEventListener("playerbtnclick", data => {
     case "shuffle":
       shuffle();
       displayPlaylist(true); // Ignore Drag and Drop events
+    break;
 
+    case "settings":
+      modal("settings");
+    break;
+    
 		default:
 		break;
 	}
@@ -203,7 +208,7 @@ async function modal(id) {
       
   container.innerHTML = content;
 
-  displayPlaylist();
+  if (id == "playlist") displayPlaylist();
 
   document.getElementById("close").onclick = function() {
     overlay.style.animation = "none";
