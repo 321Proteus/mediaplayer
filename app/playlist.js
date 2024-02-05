@@ -81,11 +81,9 @@ function rearrange() {
   for (let i=0;i<list.length;i++) {
     arranged.push(parseInt(list[i].getAttribute("order")));
   }
-  console.log(arranged)
 
   playlist = arranged.map(i => playlist[i]);
 
-  for (const el of playlist) console.log(el.title);
 }
 
 

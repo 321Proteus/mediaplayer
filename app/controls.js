@@ -57,8 +57,6 @@ function transformSlider(a) {
 
 function fitText(el, maxWidth) {
 
-  console.log(el)
-
   var width = parseInt(el.clientWidth);
   var size = parseInt(window.getComputedStyle(el).getPropertyValue("font-size"));
 
@@ -68,7 +66,6 @@ function fitText(el, maxWidth) {
       el.style.fontSize = size + "px";
       width = parseInt(el.clientWidth)
     }    
-  console.log(width, size);    
   } else {
     while (width < maxWidth && size > 56) {
       size++;
