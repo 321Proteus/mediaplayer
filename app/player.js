@@ -5,6 +5,10 @@ function playAudio(index) {
     player.src = playlist[index].url;
     player.currentTime = 0;
 
+    
+    fitText(document.getElementById("title-overlay"), parseInt(document.body.clientWidth) / 2);
+    fitText(document.getElementById("author-overlay"), parseInt(document.body.clientWidth) / 2);
+
     playerState("play");
 
 }

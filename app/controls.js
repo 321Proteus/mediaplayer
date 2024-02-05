@@ -55,6 +55,29 @@ function transformSlider(a) {
 	document.documentElement.style.setProperty("--color", `linear-gradient(to right, #75DD82 0%, #75DD82 ${a}%, gray ${a}%, gray 100%)`);
 }
 
+function fitText(el, maxWidth) {
+
+  console.log(el)
+
+  var width = parseInt(el.clientWidth);
+  var size = parseInt(window.getComputedStyle(el).getPropertyValue("font-size"));
+
+  if (width > maxWidth) {
+    while (width > maxWidth && size > 5) {
+      size--;
+      el.style.fontSize = size + "px";
+      width = parseInt(el.clientWidth)
+    }    
+  console.log(width, size);    
+  } else {
+    while (width < maxWidth && size > 56) {
+      size++;
+      el.style.fontSize = size + "px";
+      width = parseInt(el.clientWidth)
+    }  
+  }
+}
+
 document.getElementById("progress-slider").oninput = function() {
 
 	var value = this.value;
@@ -101,7 +124,10 @@ function displayPlaylist(eventMode) {
     item.appendChild(textData);
     item.childNodes[0].classList.add("playlist-thumbnail")
 
+    fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9)
+
   }
+
 
   if (!eventMode) dragAndDrop();
 }
