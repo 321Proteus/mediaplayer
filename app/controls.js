@@ -57,7 +57,7 @@ window.addEventListener("playerbtnclick", data => {
 });
 
 function transformSlider(a) {
-	document.documentElement.style.setProperty("--color", `linear-gradient(to right, #75DD82 0%, #75DD82 ${a}%, gray ${a}%, gray 100%)`);
+	document.documentElement.style.setProperty("--color", `linear-gradient(to right, var(--accent) 0%, var(--accent) ${a}%, gray ${a}%, gray 100%)`);
 }
 
 function fitText(el, maxWidth) {
