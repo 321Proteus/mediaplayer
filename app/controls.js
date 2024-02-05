@@ -125,6 +125,7 @@ function displayPlaylist(eventMode) {
     item.childNodes[0].classList.add("playlist-thumbnail")
 
     fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9)
+    fitText(textData.childNodes[1], parseInt(textData.clientWidth) * 0.9)
 
   }
 
