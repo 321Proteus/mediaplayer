@@ -21,29 +21,15 @@ function saveSettings() {
 
 function checkbox(el) {
 
-    if (el.checked == true) {
-        switch (el.id) {
-            case "save-accent": {
-                saveAccent = !saveAccent;
-                document.getElementById("save-accent-preview").innerText = saveAccent;
-            }
-            break;
-
-            default:
-            break;
+    switch (el.id) {
+        case "save-accent": {
+            saveAccent = el.checked;
+            document.getElementById("save-accent-preview").innerText = saveAccent;
         }
-    }
-    else {
-        switch (el.id) {
-            case "save-accent": {
-                saveAccent = !saveAccent;
-                document.getElementById("save-accent-preview").innerText = saveAccent;
-            }
-            break;
+        break;
 
-            default:
-            break;
-        }
+        default:
+        break;
     }
 }
 
