@@ -19,25 +19,28 @@
 
       <div class="setting">
         <div class="setting-text">
-          <div class="setting-name">Example setting name</div>
-          <div class="setting-description">Example setting description</div>
-        </div>
-
-        <label class="switch">
-          <input type="checkbox" onchange="checkbox(this)">
-          <span class="slider"></span>
-        </label>
-      </div>
-      <div class="setting">
-        <div class="setting-text">
           <div class="setting-name">Accent color</div>
           <div class="setting-description">Set your own player accent colour. Currently:
-            <div id="color-info">default</div>
+            <div class="setting-preview" id="accent-color-preview">default</div>
           </div>
         </div>
 
         <label>
           <input type="text" maxlength="7" class="textbox" id="color" spellcheck="false" autocomplete="off" placeholder="Enter HEX">
+        </label>
+      </div>
+
+      <div class="setting">
+        <div class="setting-text">
+          <div class="setting-name">Save accent color</div>
+          <div class="setting-description">Whether the accent color should be stored in localStorage. Currently:
+            <div class="setting-preview" id="save-accent-preview">default</div>
+          </div>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" onchange="checkbox(this)" id="save-accent">
+          <span class="slider"></span>
         </label>
       </div>
 
