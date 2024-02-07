@@ -142,6 +142,7 @@ function displayMetadata(songData) {
       var cover = document.getElementById("cover");
       cover.innerHTML = songData.picture;
       cover.childNodes[0].style.maxWidth = "100%";
+      cover.childNodes[0].style.filter = "brightness(0.66)";
     }
   } else {
     // Playlist end metadata (return to default)
