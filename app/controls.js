@@ -142,8 +142,6 @@ function displayMetadata(songData) {
       var cover = document.getElementById("cover");
       cover.innerHTML = songData.picture;
       cover.childNodes[0].style.maxWidth = "100%";
-    } else {
-      document.getElementById("cover").innerHTML = "<div id='cover'></div>";
     }
   } else {
     // Playlist end metadata (return to default)
