@@ -1,69 +1,67 @@
-var settings; getSettings();
+var settings;
+getSettings();
 document.documentElement.style.setProperty("--accent", settings.accentColor);
 
 var saveAccent = false;
 
 function getSettings() {
-    settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
+  settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
 
-    // TODO: Why does it need to be parsed two times?
+  // TODO: Why does it need to be parsed two times?
 
-    // if (!settings) settings = {
-    //     accentColor: "#75DD82",
-    //     alignMode: true
-    // };  
+  // if (!settings) settings = {
+  //     accentColor: "#75DD82",
+  //     alignMode: true
+  // };
 }
 
 function saveSettings() {
-    localStorage.setItem("iqplayer-settings", JSON.stringify(settings));
-
+  localStorage.setItem("iqplayer-settings", JSON.stringify(settings));
 }
 
 function checkbox(el) {
+  switch (el.id) {
+    case "save-accent":
+      {
+        saveAccent = el.checked;
+        document.getElementById("save-accent-preview").innerText = saveAccent;
+      }
+      break;
 
-    switch (el.id) {
-        case "save-accent": {
-            saveAccent = el.checked;
-            document.getElementById("save-accent-preview").innerText = saveAccent;
-        }
-        break;
-
-        default:
-        break;
-    }
+    default:
+      break;
+  }
 }
 
 function getAccent() {
-    if (saveAccent) {
-        getSettings()
-        return settings.accentColor;
-    }
-    else return settings.accentColor;
+  if (saveAccent) {
+    getSettings();
+    return settings.accentColor;
+  } else return settings.accentColor;
 }
 
 function colorScanner() {
-    var input = document.getElementById("color");
-    input.addEventListener("input", function() {
+  var input = document.getElementById("color");
+  input.addEventListener("input", function () {
+    getSettings();
 
-        getSettings()
+    var text = this.value.toUpperCase();
+    if (!text.startsWith("#")) text = "#" + text;
 
-        var text = this.value.toUpperCase();
-        if (!text.startsWith("#")) text = "#" + text;        
+    const regex = new RegExp("([A-F0-9]{6}|[A-F0-9]{3})$");
 
-        const regex = new RegExp("([A-F0-9]{6}|[A-F0-9]{3})$")
-
-        if (!regex.test(text)) {
-            document.documentElement.style.setProperty("--accent", settings.accentColor);
-            document.getElementById("accent-color-preview").innerText = "Invalid Hex colour";
-        }
-        else {
-            document.documentElement.style.setProperty("--accent", text);
-            document.getElementById("accent-color-preview").innerText = text;
-            settings.accentColor = text;
-            if (saveAccent)
-            saveSettings();
-        }
-
-    })    
+    if (!regex.test(text)) {
+      document.documentElement.style.setProperty(
+        "--accent",
+        settings.accentColor
+      );
+      document.getElementById("accent-color-preview").innerText =
+        "Invalid Hex colour";
+    } else {
+      document.documentElement.style.setProperty("--accent", text);
+      document.getElementById("accent-color-preview").innerText = text;
+      settings.accentColor = text;
+      if (saveAccent) saveSettings();
+    }
+  });
 }
-
