@@ -173,6 +173,10 @@ document.body.addEventListener("drop", async (e) => {
     if (f.type.startsWith("audio")) {
       var songData = await generateSongData(f);
 
+      if (document.getElementById("overlay").style.display == "flex") {
+        modal("playlist");
+      }
+
       addToPlaylist(songData);
     }
   }
