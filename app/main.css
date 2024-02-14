@@ -88,6 +88,15 @@ body {
     align-items: center;
 }
 
+#player-title-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 #title-overlay {
     width: fit-content;
     text-overflow: ellipsis;
