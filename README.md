@@ -1,18 +1,20 @@
 # mediaplayer
 
-IQPlayer is an online audio player. You can use it by your browser or build to your OS binary using Electron.
+IQPlayer is an online audio player.
 
-Drag and drop files to play.
-The newest version 0.5 introduced playlists.
+IQPlayer offers song/playlist looping and drag-and-drop-organised playlist. Users can pick their own accent color and save the options at localStorage.
 
-To use on your machine, clone the repository and run a live server or use `npm start` to build the electron app.
+It can be used either as a webpage or as an Electron App.
 
-To do:
+To use on your machine, clone the repository and run a live server or use `npm start` to build the binary.
+Remember to change OS preferences in package.json (Windows Portable is set by default).
+
+To do (as for 0.9.8):
 
 - Fix scrollbar color flicker when scrolling with active song
 
-- Add a settings page to configure player behaviour (e.g the position of new playlist elements - start or end?)
+- Expand config settings - playback speed, long title/artist behaviour, etc.
 
-- Implement array shuffling (the code is done, it just needs to be placed in the playlist modal)
+- Implement deleting song from playlist, as well as saving playlist session (reloading window resets it by default)
 
-- Implement song/playlist looping
+- Implement text scrolling when title is too long
