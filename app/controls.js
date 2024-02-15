@@ -185,6 +185,11 @@ function displayPlaylist(eventMode) {
     if (title.clientWidth > parseInt(textData.clientWidth)) {
       title.style.display = "none";
       createScrollingText(textData, itemData.title);
+      var scrollContainer = textData.childNodes[2];
+      var artistContainer = textData.childNodes[0];
+
+      textData.insertBefore(scrollContainer, artistContainer)
+      textData.insertBefore(artistContainer, scrollContainer.nextSibling);
     }
 
 
