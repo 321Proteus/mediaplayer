@@ -72,7 +72,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--accent);
-    filter: brightness(1.5);
+    filter: brightness(1.2);
     border-radius: 16px;
     margin: 0% 15% 15% 15%;
     width: 80%;
@@ -101,10 +101,37 @@ body {
     width: fit-content;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 
     text-align: center;
     font-size: 36px;
     font-family: "Comic Sans MS", sans-serif;
+}
+
+.scroll-container {
+    font-family: "Comic Sans MS", sans-serif;
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: row;
+    color: black;
+    font-size: 24px;
+    width: 100%;
+}
+
+.scroll-text {
+    flex: 0 0 auto;
+    z-index: 1;
+    animation: scroll 3s linear infinite;
+}
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 #author-overlay {

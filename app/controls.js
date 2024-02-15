@@ -77,12 +77,66 @@ function fitText(el, maxWidth) {
       width = parseInt(el.clientWidth);
     }
   } else {
-    while (width < maxWidth && size < 36) {
+    while (width < maxWidth && size < 30) {
       size++;
       el.style.fontSize = size + "px";
       width = parseInt(el.clientWidth);
     }
   }
+}
+
+function calculateTextWidth(text, size) {
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+
+  ctx.font = size + " Comic Sans MS";
+  var width = Math.ceil(ctx.measureText(text).width);
+
+  return width;
+}
+
+function createScrollingText(el, text) {
+
+  var textBegin = text.slice(0, text.length/3);
+  var textMiddle = text.slice(text.length/3, text.length*2/3);
+  var textEnd = text.slice(text.length*2/3, text.length);
+  console.log(`'${textBegin}' '${textMiddle}' '${textEnd}'`);
+
+  var scrollContainer = document.createElement("div");
+  scrollContainer.className = "scroll-container";
+  el.appendChild(scrollContainer);
+
+  var firstText = document.createElement("div");
+  firstText.className = "scroll-text";
+  scrollContainer.appendChild(firstText);
+
+  var uniqueClass = "scroll-text-" + Math.random().toString(36).substring(2, 9);
+
+  var firstTextItem = document.createElement("span");
+  firstTextItem.className = uniqueClass;
+  firstText.appendChild(firstTextItem);
+
+  var scrollStyle = document.createElement("style");
+  scrollStyle.innerText = `
+    .${uniqueClass}:before { content: "${textBegin}" }
+    .${uniqueClass}:after { content: "${textEnd}" }`;
+  firstTextItem.appendChild(scrollStyle);
+  
+  var firstTextContent = document.createElement("span");
+  firstTextContent.innerText = textMiddle;
+  firstTextItem.appendChild(firstTextContent);
+
+  var secondText = document.createElement("div");
+  secondText.className = "scroll-text";
+  scrollContainer.appendChild(secondText);
+
+  var secondTextItem = document.createElement("span");
+  secondTextItem.className = uniqueClass;
+  secondText.appendChild(secondTextItem);
+
+  secondTextContent = document.createElement("span");
+  secondTextContent.innerText = textMiddle;
+  secondTextItem.appendChild(secondTextContent);
 }
 
 document.getElementById("progress-slider").oninput = function () {
@@ -126,8 +180,27 @@ function displayPlaylist(eventMode) {
     item.appendChild(textData);
     item.childNodes[0].classList.add("playlist-thumbnail");
 
-    fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9);
-    fitText(textData.childNodes[1], parseInt(textData.clientWidth) * 0.9);
+    var title = textData.childNodes[0];
+
+    if (settings.textOverlap == true) {
+
+      if (title.clientWidth > parseInt(textData.clientWidth)) {
+        title.style.display = "none";
+        createScrollingText(textData, itemData.title);
+        var scrollContainer = textData.childNodes[2];
+        var artistContainer = textData.childNodes[0];
+  
+        textData.insertBefore(scrollContainer, artistContainer)
+        textData.insertBefore(artistContainer, scrollContainer.nextSibling);
+      }  
+    } else {
+      fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9);
+      fitText(textData.childNodes[1], parseInt(textData.clientWidth) * 0.9);      
+    }
+
+
+
+
   }
 
   if (!eventMode) dragAndDrop();

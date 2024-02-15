@@ -1,5 +1,7 @@
-var settings;
-getSettings();
+// Initialize and download settings at the beginning of the session
+
+var settings; getSettings();
+
 
 if (settings) document.documentElement.style.setProperty("--accent", settings.accentColor);
 
@@ -7,13 +9,6 @@ var saveAccent = false;
 
 function getSettings() {
   settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
-
-  // TODO: Why does it need to be parsed two times?
-
-  // if (!settings) settings = {
-  //     accentColor: "#75DD82",
-  //     alignMode: true
-  // };
 }
 
 function saveSettings() {
@@ -22,21 +17,39 @@ function saveSettings() {
 
 function checkbox(el) {
   switch (el.id) {
-    case "save-accent":
-      {
+    case "save-accent": {
         saveAccent = el.checked;
         document.getElementById("save-accent-preview").innerText = saveAccent;
       }
       break;
+    
+      case "text-overlap": {
+        settings.textOverlap = el.checked;
+        var preview = document.getElementById("text-overlap-preview");
+
+        if (el.checked) {
+          preview.innerHTML = "";
+          preview.style.fontSize = "3vw";
+          createScrollingText(preview, "Scrolling text");
+          document.querySelectorAll(".scroll-text").forEach(item => {
+            item.style.animation = "scroll 2s linear infinite";
+          })
+          preview.childNodes[0].style.width = "120px";
+        } else {
+          preview.innerHTML = "Shrinking text";
+          preview.style.fontSize = "2vw";
+        }
+      }
 
     default:
       break;
   }
+
+  saveSettings();
 }
 
 function getAccent() {
   if (saveAccent) {
-    getSettings();
     return settings.accentColor;
   } else return settings.accentColor;
 }
@@ -44,7 +57,6 @@ function getAccent() {
 function colorScanner() {
   var input = document.getElementById("color");
   input.addEventListener("input", function () {
-    getSettings();
 
     var text = this.value.toUpperCase();
     if (!text.startsWith("#")) text = "#" + text;

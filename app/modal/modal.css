@@ -181,7 +181,8 @@ input:checked + .slider:before {
 }
 
 .playlist-title {
-    font-size: 6vw;
+    font-size: 30px;
+    white-space: nowrap;
     font-family: "Comic Sans MS", sans-serif;
     flex: 1;
 
