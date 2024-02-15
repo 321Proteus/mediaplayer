@@ -4,6 +4,8 @@ function playAudio(index) {
   player.src = playlist[index].url;
   player.currentTime = 0;
 
+  displayMetadata(playlist[index]);
+
   fitText(
     document.getElementById("title-overlay"),
     parseInt(document.body.clientWidth) / 2
