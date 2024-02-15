@@ -100,7 +100,7 @@ function createScrollingText(el, text) {
   firstText.className = "scroll-text";
   scrollContainer.appendChild(firstText);
 
-  var uniqueClass = "scroll-text-" + Math.random().toString(36).substr(2, 9);
+  var uniqueClass = "scroll-text-" + Math.random().toString(36).substring(2, 9);
 
   var firstTextItem = document.createElement("span");
   firstTextItem.className = uniqueClass;
