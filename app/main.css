@@ -115,7 +115,7 @@ body {
     flex-direction: row;
     color: black;
     font-size: 24px;
-    width: 215px;
+    width: 100%;
 }
 
 .scroll-text {
