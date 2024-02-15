@@ -85,6 +85,48 @@ function fitText(el, maxWidth) {
   }
 }
 
+function createScrollingText(el, text) {
+
+  var textBegin = text.slice(0, text.length/3);
+  var textMiddle = text.slice(text.length/3, text.length*2/3);
+  var textEnd = text.slice(text.length*2/3, text.length);
+  console.log(`'${textBegin}' '${textMiddle}' '${textEnd}'`);
+
+  var scrollContainer = document.createElement("div");
+  scrollContainer.className = "scroll-container";
+  el.appendChild(scrollContainer);
+
+  var firstText = document.createElement("div");
+  firstText.className = "scroll-text";
+  scrollContainer.appendChild(firstText);
+
+  var firstTextItem = document.createElement("span");
+  firstTextItem.className = "scroll-item";
+  firstText.appendChild(firstTextItem);
+
+  var scrollStyle = document.createElement("style");
+  scrollStyle.innerText = `
+    .scroll-item:before { content: "${textBegin}" }
+    .scroll-item:after { content: "${textEnd}" }`;
+  firstTextItem.appendChild(scrollStyle);
+  
+  var firstTextContent = document.createElement("span");
+  firstTextContent.innerText = textMiddle;
+  firstTextItem.appendChild(firstTextContent);
+
+  var secondText = document.createElement("div");
+  secondText.className = "scroll-text";
+  scrollContainer.appendChild(secondText);
+
+  var secondTextItem = document.createElement("span");
+  secondTextItem.className = "scroll-item";
+  secondText.appendChild(secondTextItem);
+
+  secondTextContent = document.createElement("span");
+  secondTextContent.innerText = textMiddle;
+  secondTextItem.appendChild(secondTextContent);
+}
+
 document.getElementById("progress-slider").oninput = function () {
   var value = this.value;
   transformSlider(value);

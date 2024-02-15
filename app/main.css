@@ -101,10 +101,21 @@ body {
     width: fit-content;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 
     text-align: center;
     font-size: 36px;
     font-family: "Comic Sans MS", sans-serif;
+}
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 #author-overlay {
