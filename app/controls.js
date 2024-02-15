@@ -182,19 +182,25 @@ function displayPlaylist(eventMode) {
 
     var title = textData.childNodes[0];
 
-    if (title.clientWidth > parseInt(textData.clientWidth)) {
-      title.style.display = "none";
-      createScrollingText(textData, itemData.title);
-      var scrollContainer = textData.childNodes[2];
-      var artistContainer = textData.childNodes[0];
+    if (settings.textOverlap == true) {
 
-      textData.insertBefore(scrollContainer, artistContainer)
-      textData.insertBefore(artistContainer, scrollContainer.nextSibling);
+      if (title.clientWidth > parseInt(textData.clientWidth)) {
+        title.style.display = "none";
+        createScrollingText(textData, itemData.title);
+        var scrollContainer = textData.childNodes[2];
+        var artistContainer = textData.childNodes[0];
+  
+        textData.insertBefore(scrollContainer, artistContainer)
+        textData.insertBefore(artistContainer, scrollContainer.nextSibling);
+      }  
+    } else {
+      fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9);
+      fitText(textData.childNodes[1], parseInt(textData.clientWidth) * 0.9);      
     }
 
 
-    // fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9);
-    // fitText(textData.childNodes[1], parseInt(textData.clientWidth) * 0.9);
+
+
   }
 
   if (!eventMode) dragAndDrop();

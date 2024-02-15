@@ -72,7 +72,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--accent);
-    filter: brightness(1.5);
+    filter: brightness(1.2);
     border-radius: 16px;
     margin: 0% 15% 15% 15%;
     width: 80%;
@@ -111,7 +111,7 @@ body {
 .scroll-container {
     font-family: "Comic Sans MS", sans-serif;
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     color: black;
     font-size: 24px;
