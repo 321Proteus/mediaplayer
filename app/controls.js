@@ -77,7 +77,7 @@ function fitText(el, maxWidth) {
       width = parseInt(el.clientWidth);
     }
   } else {
-    while (width < maxWidth && size < 36) {
+    while (width < maxWidth && size < 30) {
       size++;
       el.style.fontSize = size + "px";
       width = parseInt(el.clientWidth);
@@ -180,8 +180,16 @@ function displayPlaylist(eventMode) {
     item.appendChild(textData);
     item.childNodes[0].classList.add("playlist-thumbnail");
 
-    fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9);
-    fitText(textData.childNodes[1], parseInt(textData.clientWidth) * 0.9);
+    var title = textData.childNodes[0];
+
+    if (title.clientWidth > parseInt(textData.clientWidth)) {
+      title.style.display = "none";
+      createScrollingText(textData, itemData.title);
+    }
+
+
+    // fitText(textData.childNodes[0], parseInt(textData.clientWidth) * 0.9);
+    // fitText(textData.childNodes[1], parseInt(textData.clientWidth) * 0.9);
   }
 
   if (!eventMode) dragAndDrop();
