@@ -77,7 +77,7 @@ function fitText(el, maxWidth) {
       width = parseInt(el.clientWidth);
     }
   } else {
-    while (width < maxWidth && size > 56) {
+    while (width < maxWidth && size < 36) {
       size++;
       el.style.fontSize = size + "px";
       width = parseInt(el.clientWidth);

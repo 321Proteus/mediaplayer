@@ -27,7 +27,6 @@ function nextItem(force) {
   if (force) {
     // Force update playlist index and override looping
     if (passCondition) playlistIndex++;
-    displayMetadata(playlist[playlistIndex]);
     playAudio(playlistIndex);
     return;
   }
@@ -45,7 +44,6 @@ function nextItem(force) {
       playlistIndex = playlistIndex;
   }
 
-  displayMetadata(playlist[playlistIndex]);
   playAudio(playlistIndex);
 }
 
@@ -58,14 +56,12 @@ function previousItem() {
   if (playlistIndex - 1 > 0) playlistIndex--;
   else playlistIndex = 0;
 
-  displayMetadata(playlist[playlistIndex]);
   playAudio(playlistIndex);
 }
 
 function startPlaylist() {
   player.setAttribute("initialized", true);
   playAudio(0);
-  displayMetadata(playlist[0]);
 }
 
 function shuffle() {

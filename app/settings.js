@@ -1,6 +1,7 @@
 var settings;
 getSettings();
-document.documentElement.style.setProperty("--accent", settings.accentColor);
+
+if (settings) document.documentElement.style.setProperty("--accent", settings.accentColor);
 
 var saveAccent = false;
 
