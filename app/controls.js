@@ -70,8 +70,6 @@ function fitText(el, maxWidth) {
     window.getComputedStyle(el).getPropertyValue("font-size")
   );
 
-  console.log(el, width);
-
   if (width > maxWidth) {
     while (width > maxWidth && size > 5) {
       size--;
