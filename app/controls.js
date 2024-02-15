@@ -85,6 +85,16 @@ function fitText(el, maxWidth) {
   }
 }
 
+function calculateTextWidth(text, size) {
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+
+  ctx.font = size + " Comic Sans MS";
+  var width = Math.ceil(ctx.measureText(text).width);
+
+  return width;
+}
+
 function createScrollingText(el, text) {
 
   var textBegin = text.slice(0, text.length/3);
