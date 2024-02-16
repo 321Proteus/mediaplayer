@@ -3,11 +3,11 @@ var playlistIndex = 0;
 
 var loopState = 0; // 0 - no loop, 1 - loop playlist, 2 - loop single song
 
-var alignMode = true; // Should new items be added to the front or back of the playlist?
 
 function addToPlaylist(item) {
-  if (alignMode == true) playlist.push(item);
-  else playlist = playlist.concat(item);
+  // Align mode - Should new items be added to the front or back of the playlist?
+  if (settings["align-mode"] == true) playlist.push(item);
+  else playlist = [item].concat(playlist);
 }
 
 function removeFromPlaylist(index) {
