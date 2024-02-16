@@ -31,6 +31,8 @@ function displaySettings() {
 
     if (settingElement.type == "checkbox")
       settingElement.checked = settings[item];
+    else if (settingElement.type == "text") 
+      settingElement.value = settings[item];
   }
 }
 
@@ -47,7 +49,7 @@ function checkbox(el) {
 
   switch (el.id) {
     case "save-accent": {
-        preview.innerText = saveAccent;
+        preview.innerText = settings[el.id];
       }
       break;
     
@@ -95,7 +97,7 @@ function colorScanner() {
       document.documentElement.style.setProperty("--accent", text);
       document.getElementById("accent-color-preview").innerText = text;
       settings["accent-color"] = text;
-      if (saveAccent) saveSettings();
+      if (settings["save-accent"]) saveSettings();
     }
   });
 }
