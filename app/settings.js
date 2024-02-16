@@ -16,10 +16,12 @@ function getSettings() {
     settings["accent-color"] = "#75DD82";
     settings["save-accent"] = true;
     settings["text-overlap"] = true;
+    
+    saveSettings();
 
   }
 
-  saveSettings();
+
 
 }
 
@@ -39,15 +41,16 @@ function saveSettings() {
 }
 
 function checkbox(el) {
+
+  settings[el.id] = el.checked;
+
   switch (el.id) {
     case "save-accent": {
-        saveAccent = el.checked;
         document.getElementById("save-accent-preview").innerText = saveAccent;
       }
       break;
     
       case "text-overlap": {
-        settings.textOverlap = el.checked;
         var preview = document.getElementById("text-overlap-preview");
 
         if (el.checked) {
@@ -74,8 +77,8 @@ function checkbox(el) {
 
 function getAccent() {
   if (saveAccent) {
-    return settings.accentColor;
-  } else return settings.accentColor;
+    return settings["accent-color"];
+  } else return settings["accent-color"];
 }
 
 function colorScanner() {
@@ -90,14 +93,14 @@ function colorScanner() {
     if (!regex.test(text)) {
       document.documentElement.style.setProperty(
         "--accent",
-        settings.accentColor
+        settings["accent-color"]
       );
       document.getElementById("accent-color-preview").innerText =
         "Invalid Hex colour";
     } else {
       document.documentElement.style.setProperty("--accent", text);
       document.getElementById("accent-color-preview").innerText = text;
-      settings.accentColor = text;
+      settings["accent-color"] = text;
       if (saveAccent) saveSettings();
     }
   });
