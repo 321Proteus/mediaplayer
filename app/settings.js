@@ -81,7 +81,7 @@ function checkbox(el) {
     default:
       break;
   }
-  displaySettings();
+
   saveSettings();
 
 }
