@@ -5,8 +5,6 @@ var settings; getSettings();
 
 if (settings) document.documentElement.style.setProperty("--accent", settings["accent-color"]);
 
-var saveAccent = false;
-
 function getSettings() {
   settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
 
@@ -44,14 +42,15 @@ function checkbox(el) {
 
   settings[el.id] = el.checked;
 
+  var preview = el.id + "-preview";
+
   switch (el.id) {
     case "save-accent": {
-        document.getElementById("save-accent-preview").innerText = saveAccent;
+        preview.innerText = saveAccent;
       }
       break;
     
       case "text-overlap": {
-        var preview = document.getElementById("text-overlap-preview");
 
         if (el.checked) {
           preview.innerHTML = "";
