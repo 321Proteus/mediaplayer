@@ -13,7 +13,8 @@ function getSettings() {
 
     settings["accent-color"] = "#75DD82";
     settings["save-accent"] = true;
-    settings["text-overlap"] = true;
+    settings["text-overlap"] = false;
+    settings["align-mode"] = true;
 
     saveSettings();
 
@@ -26,12 +27,16 @@ function getSettings() {
 function displaySettings() {
   for (const item in settings) {
     var settingElement = document.getElementById(item)
+    var previewElement = document.getElementById(item + "-preview");
 
-    if (settingElement.type == "checkbox")
+    if (settingElement.type == "checkbox") {
       settingElement.checked = settings[item];
-    
+      previewElement.innerText = settings[item];      
+    }
+
     else if (settingElement.type == "text") 
       settingElement.value = settings[item];
+
   }
 }
 
@@ -47,26 +52,27 @@ function checkbox(el) {
   console.log(preview)
 
   switch (el.id) {
+
     case "save-accent": {
         preview.innerText = settings[el.id];
       }
-      break;
+    break;
     
-      case "text-overlap": {
+    case "text-overlap": {
 
-        if (el.checked) {
-          preview.innerHTML = "";
-          preview.style.fontSize = "24px";
-          createScrollingText(preview, "Scrolling text");
-          document.querySelectorAll(".scroll-text").forEach(item => {
-            item.style.animation = "scroll 2s linear infinite";
-          })
-          preview.childNodes[0].style.width = "120px";
-        } else {
-          preview.innerHTML = "Shrinking text";
-          preview.style.fontSize = "12px";
-        }
+      if (el.checked) {
+        preview.innerHTML = "";
+        preview.style.fontSize = "24px";
+        createScrollingText(preview, "Scrolling text");
+        document.querySelectorAll(".scroll-text").forEach(item => {
+          item.style.animation = "scroll 2s linear infinite";
+        })
+        preview.childNodes[0].style.width = "120px";
+      } else {
+        preview.innerHTML = "Shrinking text";
+        preview.style.fontSize = "12px";
       }
+    }
 
     default:
       break;
