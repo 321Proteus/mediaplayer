@@ -20,8 +20,6 @@ function getSettings() {
 
   }
 
-
-
 }
 
 function displaySettings() {
@@ -73,6 +71,12 @@ function checkbox(el) {
         preview.style.fontSize = "12px";
       }
     }
+    break;
+
+    case "align-mode": {
+      preview.innerText = (el.checked) ? "begin" : "end";
+    }
+    break;
 
     default:
       break;
