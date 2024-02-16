@@ -16,7 +16,7 @@ function getSettings() {
     settings["accent-color"] = "#75DD82";
     settings["save-accent"] = true;
     settings["text-overlap"] = true;
-    
+
     saveSettings();
 
   }
@@ -73,12 +73,6 @@ function checkbox(el) {
   displaySettings();
   saveSettings();
 
-}
-
-function getAccent() {
-  if (saveAccent) {
-    return settings["accent-color"];
-  } else return settings["accent-color"];
 }
 
 function colorScanner() {
