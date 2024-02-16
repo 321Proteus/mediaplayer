@@ -29,7 +29,7 @@ function checkbox(el) {
 
         if (el.checked) {
           preview.innerHTML = "";
-          preview.style.fontSize = "3vw";
+          preview.style.fontSize = "24px";
           createScrollingText(preview, "Scrolling text");
           document.querySelectorAll(".scroll-text").forEach(item => {
             item.style.animation = "scroll 2s linear infinite";
@@ -37,7 +37,7 @@ function checkbox(el) {
           preview.childNodes[0].style.width = "120px";
         } else {
           preview.innerHTML = "Shrinking text";
-          preview.style.fontSize = "2vw";
+          preview.style.fontSize = "12px";
         }
       }
 
