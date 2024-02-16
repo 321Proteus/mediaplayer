@@ -25,12 +25,11 @@ function getSettings() {
 
 function displaySettings() {
   for (const item in settings) {
-    console.log(item)
     var settingElement = document.getElementById(item)
-    console.log(settingElement)
 
     if (settingElement.type == "checkbox")
       settingElement.checked = settings[item];
+    
     else if (settingElement.type == "text") 
       settingElement.value = settings[item];
   }
