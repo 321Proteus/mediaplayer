@@ -3,12 +3,35 @@
 var settings; getSettings();
 
 
-if (settings) document.documentElement.style.setProperty("--accent", settings.accentColor);
+if (settings) document.documentElement.style.setProperty("--accent", settings["accent-color"]);
 
 var saveAccent = false;
 
 function getSettings() {
   settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
+
+  if (!settings) {
+    settings = {};
+
+    settings["accent-color"] = "#75DD82";
+    settings["save-accent"] = true;
+    settings["text-overlap"] = true;
+
+  }
+
+  saveSettings();
+
+}
+
+function displaySettings() {
+  for (const item in settings) {
+    console.log(item)
+    var settingElement = document.getElementById(item)
+    console.log(settingElement)
+
+    if (settingElement.type == "checkbox")
+      settingElement.checked = settings[item];
+  }
 }
 
 function saveSettings() {
@@ -44,8 +67,9 @@ function checkbox(el) {
     default:
       break;
   }
-
+  displaySettings();
   saveSettings();
+
 }
 
 function getAccent() {
@@ -55,7 +79,7 @@ function getAccent() {
 }
 
 function colorScanner() {
-  var input = document.getElementById("color");
+  var input = document.getElementById("accent-color");
   input.addEventListener("input", function () {
 
     var text = this.value.toUpperCase();
