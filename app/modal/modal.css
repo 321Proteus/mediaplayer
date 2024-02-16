@@ -31,7 +31,6 @@
     top: 5%;
     width: 90%;
     height: 90%;
-    overflow: hidden visible;
 }
 
 #overlay {
@@ -73,7 +72,7 @@
 }
 
 .setting-name {
-    font-size: 5vw;
+    font-size: 48px;
     font-family: "Comic Sans MS", sans-serif;
     flex: 1;
 
@@ -81,7 +80,7 @@
 }
 
 .setting-description {
-    font-size: 3vw;
+    font-size: 24px;
     font-family: "Comic Sans MS", sans-serif;
     color: gray;
     flex: 20%;
