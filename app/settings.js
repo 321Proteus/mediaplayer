@@ -41,8 +41,9 @@ function saveSettings() {
 function checkbox(el) {
 
   settings[el.id] = el.checked;
+  var preview = document.getElementById(el.id + "-preview");
 
-  var preview = el.id + "-preview";
+  console.log(preview)
 
   switch (el.id) {
     case "save-accent": {
