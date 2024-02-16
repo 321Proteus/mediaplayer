@@ -22,43 +22,21 @@ function getSettings() {
 
 }
 
-function displaySettings() {
-  for (const item in settings) {
-    var settingElement = document.getElementById(item)
-    var previewElement = document.getElementById(item + "-preview");
+function displayPreview(setting) {
+  var el = document.getElementById(setting)
+  var preview = document.getElementById(setting + "-preview");
+  var state = el.checked;
 
-    if (settingElement.type == "checkbox") {
-      settingElement.checked = settings[item];
-      previewElement.innerText = settings[item];      
-    }
-
-    else if (settingElement.type == "text") 
-      settingElement.value = settings[item];
-
-  }
-}
-
-function saveSettings() {
-  localStorage.setItem("iqplayer-settings", JSON.stringify(settings));
-}
-
-function checkbox(el) {
-
-  settings[el.id] = el.checked;
-  var preview = document.getElementById(el.id + "-preview");
-
-  console.log(preview)
-
-  switch (el.id) {
+  switch (setting) {
 
     case "save-accent": {
-        preview.innerText = settings[el.id];
-      }
+      preview.innerText = settings[setting];
+    }
     break;
     
     case "text-overlap": {
 
-      if (el.checked) {
+      if (state == true) {
         preview.innerHTML = "";
         preview.style.fontSize = "24px";
         createScrollingText(preview, "Scrolling text");
@@ -74,13 +52,39 @@ function checkbox(el) {
     break;
 
     case "align-mode": {
-      preview.innerText = (el.checked) ? "begin" : "end";
+      preview.innerText = (state) ? "begin" : "end";
     }
     break;
 
     default:
       break;
   }
+}
+
+function displaySettings() {
+  for (const item in settings) {
+    var settingElement = document.getElementById(item)
+    var previewElement = document.getElementById(item + "-preview");
+
+    if (settingElement.type == "checkbox") {
+      settingElement.checked = settings[item];
+      displayPreview(item); 
+    }
+
+    else if (settingElement.type == "text")
+      settingElement.value = settings[item];
+
+  }
+}
+
+function saveSettings() {
+  localStorage.setItem("iqplayer-settings", JSON.stringify(settings));
+}
+
+function checkbox(el) {
+
+  settings[el.id] = el.checked;
+  displayPreview(el.id);
 
   saveSettings();
 
