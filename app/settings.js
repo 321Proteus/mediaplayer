@@ -120,8 +120,13 @@ function initSlider() {
   slider.addEventListener("input", adjustPlaybackSpeed);
 }
 
+function displayPlaybackSpeed(value) {
+  document.getElementById("playback-speed-preview").innerText = value + "x";
+}
+
 function adjustPlaybackSpeed() {
   var value = this.value;
   console.log(value)
   document.getElementById("player").playbackRate = value;
+  displayPlaybackSpeed(value);
 }
