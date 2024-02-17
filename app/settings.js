@@ -129,4 +129,5 @@ function adjustPlaybackSpeed() {
   console.log(value)
   document.getElementById("player").playbackRate = value;
   displayPlaybackSpeed(value);
+  transformSlider(this);
 }
