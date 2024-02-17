@@ -274,6 +274,7 @@ async function modal(id) {
   if (id == "playlist") displayPlaylist();
   else {
     displaySettings();
+    initSlider();
     colorScanner();
   }
   document.getElementById("close").onclick = function () {
