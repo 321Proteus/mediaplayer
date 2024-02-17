@@ -115,6 +115,11 @@ function colorScanner() {
   });
 }
 
+function mapValueToProcent(a, min, max) {
+  var x = ((a - min) / (max - min)) * 100;
+  return x;
+}
+
 function initSlider() {
   var slider = document.getElementById("playback-speed");
   slider.addEventListener("input", adjustPlaybackSpeed);

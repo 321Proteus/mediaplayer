@@ -59,9 +59,12 @@ window.addEventListener("playerbtnclick", (data) => {
 
 function transformSlider(object) {
   var a = object.value;
+  var min = object.min;
+  var max = object.max;
+  var x = mapValueToProcent(a, min, max);
   object.style.setProperty(
     "--color",
-    `linear-gradient(to right, var(--accent) 0%, var(--accent) ${a}%, gray ${a}%, gray 100%)`
+    `linear-gradient(to right, var(--accent) 0%, var(--accent) ${x}%, gray ${x}%, gray 100%)`
   );
 }
 
