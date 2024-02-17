@@ -114,3 +114,14 @@ function colorScanner() {
     }
   });
 }
+
+function initSlider() {
+  var slider = document.getElementById("playback-speed");
+  slider.addEventListener("input", adjustPlaybackSpeed);
+}
+
+function adjustPlaybackSpeed() {
+  var value = this.value;
+  console.log(value)
+  document.getElementById("player").playbackRate = value;
+}
