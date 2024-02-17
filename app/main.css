@@ -152,13 +152,15 @@ body {
     align-items: center;
 }
 
+.slider {
+    appearance: none;
+    background-color: transparent;
+}
+
 #progress-slider { 
 
     flex: 80%;
     height: 20px;
-
-    appearance: none;
-    background-color: transparent;
 
 }
 
@@ -174,7 +176,7 @@ body {
     font-family: "Comic Sans MS", sans-serif;
 }
 
-#progress-slider::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb {
     appearance: none;
     border: 1px solid #000;
     background-color: #fff;
@@ -186,12 +188,12 @@ body {
     transition: background-color 0.1s, height 0.2s, width 0.2s, margin-top 0.2s;
 }
 
-#progress-slider::-webkit-slider-thumb:hover {
+.slider::-webkit-slider-thumb:hover {
     border: 1px solid #000;
     background-color: #ccc;
 }
 
-#progress-slider::-webkit-slider-thumb:active {
+.slider::-webkit-slider-thumb:active {
     appearance: none;
     border: 1px solid #000;
     background-color: #999;
