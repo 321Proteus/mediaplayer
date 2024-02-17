@@ -59,8 +59,8 @@ window.addEventListener("playerbtnclick", (data) => {
 
 function transformSlider(object) {
   var a = object.value;
-  var min = object.min;
-  var max = object.max;
+  var min = (object.min) ? object.min : 0;
+  var max = (object.max) ? object.max : 100;
   var x = mapValueToProcent(a, min, max);
   object.style.setProperty(
     "--color",
