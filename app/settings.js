@@ -114,3 +114,25 @@ function colorScanner() {
     }
   });
 }
+
+function mapValueToProcent(a, min, max) {
+  var x = ((a - min) / (max - min)) * 100;
+  return x;
+}
+
+function initSlider() {
+  var slider = document.getElementById("playback-speed");
+  slider.addEventListener("input", adjustPlaybackSpeed);
+}
+
+function displayPlaybackSpeed(value) {
+  document.getElementById("playback-speed-preview").innerText = value + "x";
+}
+
+function adjustPlaybackSpeed() {
+  var value = this.value;
+  console.log(value)
+  document.getElementById("player").playbackRate = value;
+  displayPlaybackSpeed(value);
+  transformSlider(this);
+}

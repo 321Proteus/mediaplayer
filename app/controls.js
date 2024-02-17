@@ -57,10 +57,14 @@ window.addEventListener("playerbtnclick", (data) => {
   }
 });
 
-function transformSlider(a) {
-  document.documentElement.style.setProperty(
+function transformSlider(object) {
+  var a = object.value;
+  var min = (object.min) ? object.min : 0;
+  var max = (object.max) ? object.max : 100;
+  var x = mapValueToProcent(a, min, max);
+  object.style.setProperty(
     "--color",
-    `linear-gradient(to right, var(--accent) 0%, var(--accent) ${a}%, gray ${a}%, gray 100%)`
+    `linear-gradient(to right, var(--accent) 0%, var(--accent) ${x}%, gray ${x}%, gray 100%)`
   );
 }
 
@@ -141,7 +145,7 @@ function createScrollingText(el, text) {
 
 document.getElementById("progress-slider").oninput = function () {
   var value = this.value;
-  transformSlider(value);
+  transformSlider(this);
 
   var player = document.getElementById("player");
   if (player) {
@@ -274,6 +278,7 @@ async function modal(id) {
   if (id == "playlist") displayPlaylist();
   else {
     displaySettings();
+    initSlider();
     colorScanner();
   }
   document.getElementById("close").onclick = function () {

@@ -9,7 +9,7 @@ It can be used either as a webpage or as an Electron App.
 To use on your machine, clone the repository and run a live server or use `npm start` to build the binary.
 Remember to change OS preferences in package.json (Windows Portable is set by default).
 
-To do (as for 0.11):
+To do (as for 0.12):
 
 - Fix scrollbar color flicker when scrolling with active song
 
