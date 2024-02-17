@@ -57,8 +57,9 @@ window.addEventListener("playerbtnclick", (data) => {
   }
 });
 
-function transformSlider(a) {
-  document.documentElement.style.setProperty(
+function transformSlider(object) {
+  var a = object.value;
+  object.style.setProperty(
     "--color",
     `linear-gradient(to right, var(--accent) 0%, var(--accent) ${a}%, gray ${a}%, gray 100%)`
   );
@@ -141,7 +142,7 @@ function createScrollingText(el, text) {
 
 document.getElementById("progress-slider").oninput = function () {
   var value = this.value;
-  transformSlider(value);
+  transformSlider(this);
 
   var player = document.getElementById("player");
   if (player) {
