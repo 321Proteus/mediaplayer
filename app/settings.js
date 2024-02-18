@@ -25,7 +25,6 @@ function getSettings() {
 function displayPreview(setting) {
   var el = document.getElementById(setting)
   var preview = document.getElementById(setting + "-preview");
-  var state = el.checked;
 
   switch (setting) {
 
@@ -40,7 +39,7 @@ function displayPreview(setting) {
     
     case "text-overlap": {
 
-      if (state == true) {
+      if (el.checked == true) {
         preview.innerHTML = "";
         createScrollingText(preview, "Scrolling text");
         document.querySelectorAll(".scroll-text").forEach(item => {
@@ -60,7 +59,7 @@ function displayPreview(setting) {
     break;
 
     case "align-mode": {
-      preview.innerText = (state) ? "begin" : "end";
+      preview.innerText = (el.checked) ? "begin" : "end";
     }
     break;
 
@@ -129,7 +128,7 @@ function colorScanner() {
 function testScanner() {
   var text = this.value;
   console.log(text);
-  displayPreview();
+  displayPreview("test-textbox");
 }
 
 function mapValueToProcent(a, min, max) {
