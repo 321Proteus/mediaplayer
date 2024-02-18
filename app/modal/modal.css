@@ -31,7 +31,7 @@
     top: 5%;
     width: 90%;
     height: 90%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #overlay {
@@ -63,6 +63,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    column-gap: 10px;
 }
 
 .setting-text {
@@ -213,4 +214,16 @@ input:checked + .checkbox-slider:before {
     border-radius: 8px;
 
     scale: 0.8;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .setting {
+        padding: 10px;
+    }
+    .setting-name {
+        font-size: 24px;
+    }
+    .setting-description {
+        font-size: 12px;
+    }
 }

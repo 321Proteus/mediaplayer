@@ -25,9 +25,12 @@ function getSettings() {
 function displayPreview(setting) {
   var el = document.getElementById(setting)
   var preview = document.getElementById(setting + "-preview");
-  var state = el.checked;
 
   switch (setting) {
+
+    case "accent-color": {
+      preview.innerText = setting[setting];
+    }
 
     case "save-accent": {
       preview.innerText = settings[setting];
@@ -36,43 +39,50 @@ function displayPreview(setting) {
     
     case "text-overlap": {
 
-      if (state == true) {
+      if (el.checked == true) {
         preview.innerHTML = "";
-        preview.style.fontSize = "24px";
         createScrollingText(preview, "Scrolling text");
         document.querySelectorAll(".scroll-text").forEach(item => {
           item.style.animation = "scroll 2s linear infinite";
         })
-        preview.childNodes[0].style.width = "120px";
+        var scrollContainer = preview.childNodes[0];
+
+        scrollContainer.style.width = "80px";
+        scrollContainer.style.fontSize = "12px";
+        scrollContainer.style.color = "gray";
+
       } else {
         preview.innerHTML = "Shrinking text";
-        preview.style.fontSize = "12px";
+        preview.style.fontSize = "8px";
       }
     }
     break;
 
     case "align-mode": {
-      preview.innerText = (state) ? "begin" : "end";
+      preview.innerText = (el.checked) ? "begin" : "end";
     }
     break;
 
-    default:
-      break;
+    default: {
+      preview.innerText = el.value;
+    }
+    break;
   }
 }
 
 function displaySettings() {
   for (const item in settings) {
     var settingElement = document.getElementById(item)
-    var previewElement = document.getElementById(item + "-preview");
 
     if (settingElement.type == "checkbox") {
       settingElement.checked = settings[item];
       displayPreview(item); 
     }
 
-    else if (settingElement.type == "text")
+    else {
       settingElement.value = settings[item];
+      displayPreview(item);
+    }
 
   }
 }
@@ -91,33 +101,47 @@ function checkbox(el) {
 }
 
 function colorScanner() {
-  var input = document.getElementById("accent-color");
-  input.addEventListener("input", function () {
+  var text = this.value.toUpperCase();
+  if (!text.startsWith("#")) text = "#" + text;
 
-    var text = this.value.toUpperCase();
-    if (!text.startsWith("#")) text = "#" + text;
+  const regex = new RegExp("([A-F0-9]{6}|[A-F0-9]{3})$");
 
-    const regex = new RegExp("([A-F0-9]{6}|[A-F0-9]{3})$");
+  if (!regex.test(text)) {
+    document.getElementById("accent-color-preview").innerText =
+      "Invalid Hex colour";
+  } else {
+    document.documentElement.style.setProperty("--accent", text);
+    document.getElementById("accent-color-preview").innerText = text;
+    settings["accent-color"] = text;
+    if (settings["save-accent"]) saveSettings();
+  }
+}
 
-    if (!regex.test(text)) {
-      document.documentElement.style.setProperty(
-        "--accent",
-        settings["accent-color"]
-      );
-      document.getElementById("accent-color-preview").innerText =
-        "Invalid Hex colour";
-    } else {
-      document.documentElement.style.setProperty("--accent", text);
-      document.getElementById("accent-color-preview").innerText = text;
-      settings["accent-color"] = text;
-      if (settings["save-accent"]) saveSettings();
-    }
-  });
+function testScanner() {
+  var text = this.value;
+  displayPreview("test-textbox");
 }
 
 function mapValueToProcent(a, min, max) {
   var x = ((a - min) / (max - min)) * 100;
   return x;
+}
+
+function initTextbox() {
+  var inputCollection = document.querySelectorAll(".textbox");
+
+  inputCollection.forEach(input => {
+
+    var scannerFunction = undefined;
+
+    switch (input.id) {
+        case "accent-color": scannerFunction = colorScanner; break;
+        case "test-textbox": scannerFunction = testScanner; break;
+        default: break;
+    }
+
+    input.addEventListener("input", scannerFunction)
+  });
 }
 
 function initSlider() {
