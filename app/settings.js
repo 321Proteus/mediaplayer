@@ -64,8 +64,10 @@ function displayPreview(setting) {
     }
     break;
 
-    default:
-      break;
+    default: {
+      preview.innerText = el.value;
+    }
+    break;
   }
 }
 
@@ -127,6 +129,7 @@ function colorScanner() {
 function testScanner() {
   var text = this.value;
   console.log(text);
+  displayPreview();
 }
 
 function mapValueToProcent(a, min, max) {
