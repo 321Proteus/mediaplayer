@@ -122,7 +122,7 @@ function createScrollingText(el, text) {
 
   var scrollStyle = document.createElement("style");
   scrollStyle.innerText = `
-    .${uniqueClass}:before { content: "${textBegin}" }
+    .${uniqueClass}:before { content: "\x12${textBegin}" }
     .${uniqueClass}:after { content: "${textEnd}" }`;
   firstTextItem.appendChild(scrollStyle);
   
