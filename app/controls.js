@@ -279,7 +279,7 @@ async function modal(id) {
   else {
     displaySettings();
     initSlider();
-    colorScanner();
+    initTextbox();
   }
   document.getElementById("close").onclick = function () {
     overlay.style.animation = "none";
