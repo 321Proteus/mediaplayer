@@ -101,28 +101,20 @@ function checkbox(el) {
 }
 
 function colorScanner() {
-  var input = document.getElementById("accent-color");
-  input.addEventListener("input", function () {
+  var text = this.value.toUpperCase();
+  if (!text.startsWith("#")) text = "#" + text;
 
-    var text = this.value.toUpperCase();
-    if (!text.startsWith("#")) text = "#" + text;
+  const regex = new RegExp("([A-F0-9]{6}|[A-F0-9]{3})$");
 
-    const regex = new RegExp("([A-F0-9]{6}|[A-F0-9]{3})$");
-
-    if (!regex.test(text)) {
-      document.documentElement.style.setProperty(
-        "--accent",
-        settings["accent-color"]
-      );
-      document.getElementById("accent-color-preview").innerText =
-        "Invalid Hex colour";
-    } else {
-      document.documentElement.style.setProperty("--accent", text);
-      document.getElementById("accent-color-preview").innerText = text;
-      settings["accent-color"] = text;
-      if (settings["save-accent"]) saveSettings();
-    }
-  });
+  if (!regex.test(text)) {
+    document.getElementById("accent-color-preview").innerText =
+      "Invalid Hex colour";
+  } else {
+    document.documentElement.style.setProperty("--accent", text);
+    document.getElementById("accent-color-preview").innerText = text;
+    settings["accent-color"] = text;
+    if (settings["save-accent"]) saveSettings();
+  }
 }
 
 function testScanner() {
