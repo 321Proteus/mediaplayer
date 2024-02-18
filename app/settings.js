@@ -127,7 +127,6 @@ function colorScanner() {
 
 function testScanner() {
   var text = this.value;
-  console.log(text);
   displayPreview("test-textbox");
 }
 
@@ -138,7 +137,6 @@ function mapValueToProcent(a, min, max) {
 
 function initTextbox() {
   var inputCollection = document.querySelectorAll(".textbox");
-  console.log(inputCollection)
 
   inputCollection.forEach(input => {
 
