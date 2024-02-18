@@ -29,6 +29,10 @@ function displayPreview(setting) {
 
   switch (setting) {
 
+    case "accent-color": {
+      preview.innerText = setting[setting];
+    }
+
     case "save-accent": {
       preview.innerText = settings[setting];
     }
@@ -64,15 +68,16 @@ function displayPreview(setting) {
 function displaySettings() {
   for (const item in settings) {
     var settingElement = document.getElementById(item)
-    var previewElement = document.getElementById(item + "-preview");
 
     if (settingElement.type == "checkbox") {
       settingElement.checked = settings[item];
       displayPreview(item); 
     }
 
-    else if (settingElement.type == "text")
+    else {
       settingElement.value = settings[item];
+      displayPreview(item);
+    }
 
   }
 }
