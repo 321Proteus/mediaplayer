@@ -124,9 +124,32 @@ function colorScanner() {
   });
 }
 
+function testScanner() {
+  var text = this.value;
+  console.log(text);
+}
+
 function mapValueToProcent(a, min, max) {
   var x = ((a - min) / (max - min)) * 100;
   return x;
+}
+
+function initTextbox() {
+  var inputCollection = document.querySelectorAll(".textbox");
+  console.log(inputCollection)
+
+  inputCollection.forEach(input => {
+
+    var scannerFunction = undefined;
+
+    switch (input.id) {
+        case "accent-color": scannerFunction = colorScanner; break;
+        case "test-textbox": scannerFunction = testScanner; break;
+        default: break;
+    }
+
+    input.addEventListener("input", scannerFunction)
+  });
 }
 
 function initSlider() {
