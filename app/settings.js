@@ -42,15 +42,19 @@ function displayPreview(setting) {
 
       if (state == true) {
         preview.innerHTML = "";
-        preview.style.fontSize = "24px";
         createScrollingText(preview, "Scrolling text");
         document.querySelectorAll(".scroll-text").forEach(item => {
           item.style.animation = "scroll 2s linear infinite";
         })
-        preview.childNodes[0].style.width = "120px";
+        var scrollContainer = preview.childNodes[0];
+
+        scrollContainer.style.width = "80px";
+        scrollContainer.style.fontSize = "12px";
+        scrollContainer.style.color = "gray";
+
       } else {
         preview.innerHTML = "Shrinking text";
-        preview.style.fontSize = "12px";
+        preview.style.fontSize = "8px";
       }
     }
     break;
