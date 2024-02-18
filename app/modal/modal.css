@@ -214,3 +214,15 @@ input:checked + .checkbox-slider:before {
 
     scale: 0.8;
 }
+
+@media (max-aspect-ratio: 1/1) {
+    .setting {
+        padding: 10px;
+    }
+    .setting-name {
+        font-size: 24px;
+    }
+    .setting-description {
+        font-size: 12px;
+    }
+}
