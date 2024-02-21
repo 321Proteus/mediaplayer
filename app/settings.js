@@ -155,7 +155,6 @@ function displayPlaybackSpeed(value) {
 
 function adjustPlaybackSpeed() {
   var value = this.value;
-  console.log(value)
   document.getElementById("player").playbackRate = value;
   displayPlaybackSpeed(value);
   transformSlider(this);
