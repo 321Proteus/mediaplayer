@@ -154,6 +154,7 @@ function initTextbox() {
 
 function initSlider() {
   var slider = document.getElementById("playback-speed");
+  adjustPlaybackSpeed();
   slider.addEventListener("input", adjustPlaybackSpeed);
 }
 
@@ -163,11 +164,17 @@ function displayPlaybackSpeed(value) {
 
 function adjustPlaybackSpeed() {
   var slider = document.getElementById("playback-speed");
-  var value = slider.value;
-  console.log(slider)
-  if (player) player.playbackRate = value;
+  var value;
+  if (slider) value = slider.value;
+  else value = settings["playback-speed"];
+
+  player.playbackRate = value;
   settings["playback-speed"] = value;
   saveSettings();
-  displayPlaybackSpeed(value);
-  transformSlider(slider);
+
+  if (slider) {
+    displayPlaybackSpeed(value);
+    transformSlider(slider);
+  }
+
 }
