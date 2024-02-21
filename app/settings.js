@@ -61,7 +61,7 @@ function displayPreview(setting) {
     break;
 
     case "align-mode": {
-      preview.innerText = (el.checked) ? "begin" : "end";
+      preview.innerText = (el.checked) ? "end" : "begin";
     }
     break;
 
