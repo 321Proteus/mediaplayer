@@ -154,7 +154,6 @@ function initTextbox() {
 
 function initSlider() {
   var slider = document.getElementById("playback-speed");
-  adjustPlaybackSpeed();
   slider.addEventListener("input", adjustPlaybackSpeed);
 }
 
