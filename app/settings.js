@@ -15,6 +15,7 @@ function getSettings() {
     settings["save-accent"] = true;
     settings["text-overlap"] = false;
     settings["align-mode"] = true;
+    settings["playback-speed"] = 1.0;
 
     saveSettings();
 
@@ -156,6 +157,8 @@ function displayPlaybackSpeed(value) {
 function adjustPlaybackSpeed() {
   var value = this.value;
   document.getElementById("player").playbackRate = value;
+  settings["playback-speed"] = value;
+  saveSettings();
   displayPlaybackSpeed(value);
   transformSlider(this);
 }
