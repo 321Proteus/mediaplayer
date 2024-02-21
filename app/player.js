@@ -56,5 +56,5 @@ function getSongTime(player) {
   slider.max = duration;
 
   var valuePercent = (current / duration) * 100;
-  transformSlider(valuePercent);
+  transformSlider(slider);
 }
