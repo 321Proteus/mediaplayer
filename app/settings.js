@@ -6,8 +6,9 @@ var settings; getSettings();
 if (settings) document.documentElement.style.setProperty("--accent", settings["accent-color"]);
 
 function getSettings() {
-  settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
 
+  settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
+  console.log(settings)
   if (!settings) {
     settings = {};
 
@@ -61,6 +62,12 @@ function displayPreview(setting) {
 
     case "align-mode": {
       preview.innerText = (el.checked) ? "begin" : "end";
+    }
+    break;
+
+    case "playback-speed": {
+      el.value = settings[setting];
+      adjustPlaybackSpeed();
     }
     break;
 
@@ -155,10 +162,12 @@ function displayPlaybackSpeed(value) {
 }
 
 function adjustPlaybackSpeed() {
-  var value = this.value;
-  document.getElementById("player").playbackRate = value;
+  var slider = document.getElementById("playback-speed");
+  var value = slider.value;
+  console.log(slider)
+  if (player) player.playbackRate = value;
   settings["playback-speed"] = value;
   saveSettings();
   displayPlaybackSpeed(value);
-  transformSlider(this);
+  transformSlider(slider);
 }
