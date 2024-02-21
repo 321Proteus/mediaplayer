@@ -14,7 +14,7 @@ function playAudio(index) {
     document.getElementById("author-overlay"),
     parseInt(document.body.clientWidth) / 2
   );
-
+  adjustPlaybackSpeed();
   playerState("play");
 }
 
@@ -56,5 +56,5 @@ function getSongTime(player) {
   slider.max = duration;
 
   var valuePercent = (current / duration) * 100;
-  transformSlider(valuePercent);
+  transformSlider(slider);
 }

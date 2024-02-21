@@ -6,8 +6,9 @@ var settings; getSettings();
 if (settings) document.documentElement.style.setProperty("--accent", settings["accent-color"]);
 
 function getSettings() {
-  settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
 
+  settings = JSON.parse(localStorage.getItem("iqplayer-settings"));
+  console.log(settings)
   if (!settings) {
     settings = {};
 
@@ -15,6 +16,7 @@ function getSettings() {
     settings["save-accent"] = true;
     settings["text-overlap"] = false;
     settings["align-mode"] = true;
+    settings["playback-speed"] = 1.0;
 
     saveSettings();
 
@@ -29,7 +31,7 @@ function displayPreview(setting) {
   switch (setting) {
 
     case "accent-color": {
-      preview.innerText = setting[setting];
+      preview.innerText = settings[setting];
     }
 
     case "save-accent": {
@@ -59,7 +61,13 @@ function displayPreview(setting) {
     break;
 
     case "align-mode": {
-      preview.innerText = (el.checked) ? "begin" : "end";
+      preview.innerText = (el.checked) ? "end" : "begin";
+    }
+    break;
+
+    case "playback-speed": {
+      el.value = settings[setting];
+      adjustPlaybackSpeed();
     }
     break;
 
@@ -149,14 +157,19 @@ function initSlider() {
   slider.addEventListener("input", adjustPlaybackSpeed);
 }
 
-function displayPlaybackSpeed(value) {
-  document.getElementById("playback-speed-preview").innerText = value + "x";
-}
-
 function adjustPlaybackSpeed() {
-  var value = this.value;
-  console.log(value)
-  document.getElementById("player").playbackRate = value;
-  displayPlaybackSpeed(value);
-  transformSlider(this);
+  var slider = document.getElementById("playback-speed");
+  var value;
+  if (slider) value = slider.value;
+  else value = settings["playback-speed"];
+
+  player.playbackRate = value;
+  settings["playback-speed"] = value;
+  saveSettings();
+
+  if (slider) {
+    document.getElementById("playback-speed-preview").innerText = value + "x";
+    transformSlider(slider);
+  }
+
 }
