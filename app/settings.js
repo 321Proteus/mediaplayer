@@ -158,10 +158,6 @@ function initSlider() {
   slider.addEventListener("input", adjustPlaybackSpeed);
 }
 
-function displayPlaybackSpeed(value) {
-  document.getElementById("playback-speed-preview").innerText = value + "x";
-}
-
 function adjustPlaybackSpeed() {
   var slider = document.getElementById("playback-speed");
   var value;
@@ -173,7 +169,7 @@ function adjustPlaybackSpeed() {
   saveSettings();
 
   if (slider) {
-    displayPlaybackSpeed(value);
+    document.getElementById("playback-speed-preview").innerText = value + "x";
     transformSlider(slider);
   }
 
