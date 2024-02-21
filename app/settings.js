@@ -30,7 +30,7 @@ function displayPreview(setting) {
   switch (setting) {
 
     case "accent-color": {
-      preview.innerText = setting[setting];
+      preview.innerText = settings[setting];
     }
 
     case "save-accent": {
