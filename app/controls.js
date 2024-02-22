@@ -167,12 +167,19 @@ function displayPlaylist(eventMode) {
     item.classList.add("playlist-item");
     container.append(item);
 
-    if (itemData.picture) item.innerHTML += itemData.picture;
-    else {
+    var thumbnail = document.createElement("div");
+    thumbnail.className = "playlist-thumbnail";
+
+    if (itemData.picture) {
+    thumbnail.innerHTML += itemData.picture;
+    thumbnail.childNodes[0].className = "image-thumbnail";
+    } else {
       var fallbackImage = document.createElement("div");
       fallbackImage.classList.add("fallback-thumbnail");
-      item.appendChild(fallbackImage);
+      thumbnail.appendChild(fallbackImage);
     }
+
+    item.appendChild(thumbnail)
 
     var textData = document.createElement("div");
     textData.classList.add("playlist-text");
@@ -182,7 +189,6 @@ function displayPlaylist(eventMode) {
     textData.innerHTML += `<div class="playlist-artist">${itemData.artist}</div>`;
 
     item.appendChild(textData);
-    item.childNodes[0].classList.add("playlist-thumbnail");
 
     var title = textData.childNodes[0];
 

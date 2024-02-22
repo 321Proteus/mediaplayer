@@ -202,18 +202,22 @@ input:checked + .checkbox-slider:before {
 .playlist-thumbnail {
     flex: 40%;
     max-width: 20%;
-    aspect-ratio: 1/1;
     padding: 10px;
-    border-radius: 16px;
 }
 
 .fallback-thumbnail {
+    width: 100%;
+    aspect-ratio: 1/1;
     background-color: var(--accent);
-    filter: brightness(1.5);
+    filter: brightness(1.2);
 
     border-radius: 8px;
+}
 
-    scale: 0.8;
+.image-thumbnail {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
 }
 
 @media (max-aspect-ratio: 1/1) {
