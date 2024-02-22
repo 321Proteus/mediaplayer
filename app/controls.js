@@ -190,6 +190,12 @@ function displayPlaylist(eventMode) {
 
     item.appendChild(textData);
 
+    var deleteButton = document.createElement("img");
+    deleteButton.src = "./images/exit.png";
+    deleteButton.classList.add("button","delete");
+
+    item.appendChild(deleteButton)
+
     var title = textData.childNodes[0];
 
     if (settings.textOverlap == true) {

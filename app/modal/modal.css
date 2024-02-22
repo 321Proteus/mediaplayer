@@ -200,8 +200,15 @@ input:checked + .checkbox-slider:before {
 }
 
 .playlist-thumbnail {
-    flex: 40%;
+    flex: 10%;
     max-width: 20%;
+    padding: 10px;
+}
+
+.delete {
+    flex: 10%;
+    width: 1%;
+    scale: 0.5;
     padding: 10px;
 }
 
