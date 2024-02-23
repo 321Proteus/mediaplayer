@@ -200,20 +200,31 @@ input:checked + .checkbox-slider:before {
 }
 
 .playlist-thumbnail {
-    flex: 40%;
+    flex: 10%;
     max-width: 20%;
-    aspect-ratio: 1/1;
     padding: 10px;
-    border-radius: 16px;
+}
+
+.delete {
+    flex: 10%;
+    width: 1%;
+    scale: 0.5;
+    padding: 10px;
 }
 
 .fallback-thumbnail {
+    width: 100%;
+    aspect-ratio: 1/1;
     background-color: var(--accent);
-    filter: brightness(1.5);
+    filter: brightness(1.2);
 
     border-radius: 8px;
+}
 
-    scale: 0.8;
+.image-thumbnail {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
 }
 
 @media (max-aspect-ratio: 1/1) {
