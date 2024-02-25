@@ -1,10 +1,12 @@
-var playerButtons = document.querySelectorAll("#player-button");
+var playerButtons = document.querySelectorAll(".player-button");
 
 function handleButton(id) {
   var event = new CustomEvent("playerbtnclick", { detail: { id: id } });
 
   window.dispatchEvent(event);
 }
+
+for (const button of playerButtons) button.draggable = false;
 
 window.addEventListener("playerbtnclick", (data) => {
   // alert("Pressed button: " + id);
