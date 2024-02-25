@@ -121,7 +121,7 @@ body {
 .scroll-text {
     flex: 0 0 auto;
     z-index: 1;
-    animation: scroll 3s linear infinite;
+    animation: scroll linear infinite;
 }
 
 

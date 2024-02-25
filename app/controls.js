@@ -1,10 +1,12 @@
-var playerButtons = document.querySelectorAll("#player-button");
+var playerButtons = document.querySelectorAll(".player-button");
 
 function handleButton(id) {
   var event = new CustomEvent("playerbtnclick", { detail: { id: id } });
 
   window.dispatchEvent(event);
 }
+
+for (const button of playerButtons) button.draggable = false;
 
 window.addEventListener("playerbtnclick", (data) => {
   // alert("Pressed button: " + id);
@@ -106,12 +108,16 @@ function createScrollingText(el, text) {
   var textEnd = text.slice(text.length*2/3, text.length);
   console.log(`'${textBegin}' '${textMiddle}' '${textEnd}'`);
 
+  var duration = text.length / 5 + 's';
+  console.log(duration)
+
   var scrollContainer = document.createElement("div");
   scrollContainer.className = "scroll-container";
   el.appendChild(scrollContainer);
 
   var firstText = document.createElement("div");
   firstText.className = "scroll-text";
+  firstText.style.animationDuration = duration;
   scrollContainer.appendChild(firstText);
 
   var uniqueClass = "scroll-text-" + Math.random().toString(36).substring(2, 9);
@@ -132,6 +138,7 @@ function createScrollingText(el, text) {
 
   var secondText = document.createElement("div");
   secondText.className = "scroll-text";
+  secondText.style.animationDuration = duration;
   scrollContainer.appendChild(secondText);
 
   var secondTextItem = document.createElement("span");
@@ -152,6 +159,28 @@ document.getElementById("progress-slider").oninput = function () {
     player.currentTime = value;
   }
 };
+
+async function handleFiles(files) {
+  console.log(files)
+  for (let i = 0; i < files.length; i++) {
+    var f = files[i];
+    console.log(`${f.name} (${f.type}) ${f.size} B`);
+
+    if (f.type.startsWith("audio")) {
+      var songData = await generateSongData(f);
+
+      if (document.getElementById("overlay").style.display == "flex") {
+        modal("playlist");
+      }
+
+      addToPlaylist(songData);
+    }
+  }
+  console.log(playlist);
+
+  if (!player.getAttribute("initialized")) startPlaylist();
+
+}
 
 function displayPlaylist(eventMode) {
   var container = document.getElementById("playlist");
@@ -191,15 +220,16 @@ function displayPlaylist(eventMode) {
     item.appendChild(textData);
 
     var deleteButton = document.createElement("img");
-    deleteButton.src = "./images/exit.png";
+    deleteButton.src = "./images/delete.png";
     deleteButton.classList.add("button","delete");
     deleteButton.setAttribute("onclick", `removeFromPlaylist(${i}); displayPlaylist()`);
 
     item.appendChild(deleteButton)
 
     var title = textData.childNodes[0];
+    console.log(title);
 
-    if (settings.textOverlap == true) {
+    if (settings["text-overlap"] == true) {
 
       if (title.clientWidth > parseInt(textData.clientWidth)) {
         title.style.display = "none";
@@ -216,9 +246,31 @@ function displayPlaylist(eventMode) {
     }
 
 
-
-
   }
+
+    var lastItem = document.createElement("div");
+    lastItem.draggable = false;
+    lastItem.classList = ["playlist-add"];
+
+    var addItemsImage = document.createElement("img");
+    addItemsImage.src = "./images/add.png";
+    lastItem.appendChild(addItemsImage)
+
+    var addItemsText = document.createElement("div");
+    addItemsText.innerText = "Click to add songs\nYou can also drag and drop";
+    lastItem.appendChild(addItemsText);
+
+    var fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.multiple = "multiple";
+    fileInput.style.display = "none";
+
+    fileInput.oninput = e => handleFiles(e.target.files);
+    
+    lastItem.appendChild(fileInput);
+    lastItem.onclick = () => { fileInput.click() }
+
+    container.appendChild(lastItem);
 
   if (!eventMode) dragAndDrop();
 }
@@ -254,26 +306,7 @@ document.body.addEventListener("dragleave", () => {});
 document.body.addEventListener("drop", async (e) => {
   e.preventDefault();
 
-  var files = e.dataTransfer.files;
-
-  for (let i = 0; i < files.length; i++) {
-    var f = files[i];
-    console.log(`${f.name} (${f.type}) ${f.size} B`);
-
-    if (f.type.startsWith("audio")) {
-      var songData = await generateSongData(f);
-
-      if (document.getElementById("overlay").style.display == "flex") {
-        modal("playlist");
-      }
-
-      addToPlaylist(songData);
-    }
-  }
-
-  console.log(playlist);
-
-  if (!player.getAttribute("initialized")) startPlaylist();
+  handleFiles(e.dataTransfer.files);
 });
 
 async function modal(id) {
