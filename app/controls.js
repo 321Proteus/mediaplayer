@@ -220,25 +220,16 @@ function displayPlaylist(eventMode) {
 
     var lastItem = document.createElement("div");
     lastItem.draggable = false;
-    lastItem.style.flexGrow = 1;
-    lastItem.style.display = "flex";
-    lastItem.style.flexDirection = "column";
-    lastItem.style.justifyContent = "start";
-    lastItem.style.alignItems = "center";
+    lastItem.classList = ["playlist-add"];
 
     var addItemsImage = document.createElement("img");
     addItemsImage.src = "./images/add.png";
-    addItemsImage.style.maxHeight = "80px";
-    addItemsImage.style.width = "80px";
     lastItem.appendChild(addItemsImage)
 
-    var addItemsHeader = document.createElement("div");
-    addItemsHeader.style.fontFamily = "Comic Sans MS";
-    addItemsHeader.style.color = document.documentElement.style.getPropertyValue("--accent");
-    addItemsHeader.style.filter = "brightness(0.8)";
-    addItemsHeader.style.textAlign = "center";
-    addItemsHeader.innerText = "Click to add songs\nYou can also drag and drop";
-    lastItem.appendChild(addItemsHeader)
+    var addItemsText = document.createElement("div");
+    addItemsText.innerText = "Click to add songs\nYou can also drag and drop";
+    
+    lastItem.appendChild(addItemsText);
     container.appendChild(lastItem);
 
   if (!eventMode) dragAndDrop();

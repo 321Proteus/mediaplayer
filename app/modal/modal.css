@@ -209,6 +209,26 @@ input:checked + .checkbox-slider:before {
     width: fit-content;
 }
 
+.playlist-add {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.playlist-add > img {
+    max-height: 80px;
+    width: 80px;
+}
+
+.playlist-add > div {
+    font-family: "Comic Sans MS";
+    color: var("--accent");
+    filter: brightness(0.8);
+    text-align: center;
+}
+
 .playlist-thumbnail {
     flex: 10%;
     max-width: 20%;
