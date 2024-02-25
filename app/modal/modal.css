@@ -224,7 +224,7 @@ input:checked + .checkbox-slider:before {
 
 .playlist-add > div {
     font-family: "Comic Sans MS";
-    color: var("--accent");
+    color: var(--accent);
     filter: brightness(0.8);
     text-align: center;
 }
