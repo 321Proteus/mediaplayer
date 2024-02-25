@@ -228,8 +228,36 @@ function displayPlaylist(eventMode) {
 
     var addItemsText = document.createElement("div");
     addItemsText.innerText = "Click to add songs\nYou can also drag and drop";
-    
     lastItem.appendChild(addItemsText);
+
+    var fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.style.display = "none";
+    
+    fileInput.oninput = async function(e) {
+      var files = e.target.files;
+      for (let i = 0; i < files.length; i++) {
+        var f = files[i];
+        console.log(`${f.name} (${f.type}) ${f.size} B`);
+    
+        if (f.type.startsWith("audio")) {
+          var songData = await generateSongData(f);
+    
+          if (document.getElementById("overlay").style.display == "flex") {
+            modal("playlist");
+          }
+    
+          addToPlaylist(songData);
+        }
+      }
+      console.log(playlist);
+
+      if (!player.getAttribute("initialized")) startPlaylist();
+
+    }
+    lastItem.appendChild(fileInput);
+    lastItem.onclick = () => { fileInput.click() }
+
     container.appendChild(lastItem);
 
   if (!eventMode) dragAndDrop();
