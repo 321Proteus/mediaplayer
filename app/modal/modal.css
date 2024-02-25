@@ -34,6 +34,10 @@
     overflow-y: auto;
 }
 
+#modal-body {
+    height: inherit;
+}
+
 #overlay {
     display: none;
     position: fixed;
@@ -160,6 +164,12 @@ input:checked + .checkbox-slider:before {
 
 
 /* Playlist styling */ 
+
+#playlist {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+}
 
 .placeholder {
     background-color: #eee;
