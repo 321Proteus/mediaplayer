@@ -254,6 +254,7 @@ function displayPlaylist(eventMode) {
 
     var fileInput = document.createElement("input");
     fileInput.type = "file";
+    fileInput.multiple = "multiple";
     fileInput.style.display = "none";
 
     fileInput.oninput = e => handleFiles(e.target.files);
