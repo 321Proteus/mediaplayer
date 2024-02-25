@@ -216,9 +216,13 @@ function displayPlaylist(eventMode) {
     }
 
 
-
-
   }
+
+    var lastItem = document.createElement("div");
+    lastItem.draggable = false;
+    lastItem.style.flexGrow = 1;
+    lastItem.style.backgroundColor = "#ff0";
+    container.appendChild(lastItem);
 
   if (!eventMode) dragAndDrop();
 }
