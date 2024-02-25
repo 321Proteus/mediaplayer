@@ -166,7 +166,7 @@ input:checked + .checkbox-slider:before {
 /* Playlist styling */ 
 
 #playlist {
-    height: inherit;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
