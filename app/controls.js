@@ -191,7 +191,7 @@ function displayPlaylist(eventMode) {
     item.appendChild(textData);
 
     var deleteButton = document.createElement("img");
-    deleteButton.src = "./images/exit.png";
+    deleteButton.src = "./images/delete.png";
     deleteButton.classList.add("button","delete");
     deleteButton.setAttribute("onclick", `removeFromPlaylist(${i}); displayPlaylist()`);
 
