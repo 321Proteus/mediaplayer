@@ -106,12 +106,16 @@ function createScrollingText(el, text) {
   var textEnd = text.slice(text.length*2/3, text.length);
   console.log(`'${textBegin}' '${textMiddle}' '${textEnd}'`);
 
+  var duration = text.length / 5 + 's';
+  console.log(duration)
+
   var scrollContainer = document.createElement("div");
   scrollContainer.className = "scroll-container";
   el.appendChild(scrollContainer);
 
   var firstText = document.createElement("div");
   firstText.className = "scroll-text";
+  firstText.style.animationDuration = duration;
   scrollContainer.appendChild(firstText);
 
   var uniqueClass = "scroll-text-" + Math.random().toString(36).substring(2, 9);
@@ -132,6 +136,7 @@ function createScrollingText(el, text) {
 
   var secondText = document.createElement("div");
   secondText.className = "scroll-text";
+  secondText.style.animationDuration = duration;
   scrollContainer.appendChild(secondText);
 
   var secondTextItem = document.createElement("span");
