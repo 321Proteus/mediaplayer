@@ -153,6 +153,28 @@ document.getElementById("progress-slider").oninput = function () {
   }
 };
 
+async function handleFiles(files) {
+  console.log(files)
+  for (let i = 0; i < files.length; i++) {
+    var f = files[i];
+    console.log(`${f.name} (${f.type}) ${f.size} B`);
+
+    if (f.type.startsWith("audio")) {
+      var songData = await generateSongData(f);
+
+      if (document.getElementById("overlay").style.display == "flex") {
+        modal("playlist");
+      }
+
+      addToPlaylist(songData);
+    }
+  }
+  console.log(playlist);
+
+  if (!player.getAttribute("initialized")) startPlaylist();
+
+}
+
 function displayPlaylist(eventMode) {
   var container = document.getElementById("playlist");
   container.innerHTML = "";
@@ -233,28 +255,9 @@ function displayPlaylist(eventMode) {
     var fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.style.display = "none";
-    
-    fileInput.oninput = async function(e) {
-      var files = e.target.files;
-      for (let i = 0; i < files.length; i++) {
-        var f = files[i];
-        console.log(`${f.name} (${f.type}) ${f.size} B`);
-    
-        if (f.type.startsWith("audio")) {
-          var songData = await generateSongData(f);
-    
-          if (document.getElementById("overlay").style.display == "flex") {
-            modal("playlist");
-          }
-    
-          addToPlaylist(songData);
-        }
-      }
-      console.log(playlist);
 
-      if (!player.getAttribute("initialized")) startPlaylist();
-
-    }
+    fileInput.oninput = e => handleFiles(e.target.files);
+    
     lastItem.appendChild(fileInput);
     lastItem.onclick = () => { fileInput.click() }
 
@@ -294,26 +297,7 @@ document.body.addEventListener("dragleave", () => {});
 document.body.addEventListener("drop", async (e) => {
   e.preventDefault();
 
-  var files = e.dataTransfer.files;
-
-  for (let i = 0; i < files.length; i++) {
-    var f = files[i];
-    console.log(`${f.name} (${f.type}) ${f.size} B`);
-
-    if (f.type.startsWith("audio")) {
-      var songData = await generateSongData(f);
-
-      if (document.getElementById("overlay").style.display == "flex") {
-        modal("playlist");
-      }
-
-      addToPlaylist(songData);
-    }
-  }
-
-  console.log(playlist);
-
-  if (!player.getAttribute("initialized")) startPlaylist();
+  handleFiles(e.dataTransfer.files);
 });
 
 async function modal(id) {
