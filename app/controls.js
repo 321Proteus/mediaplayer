@@ -106,11 +106,9 @@ function createScrollingText(el, text) {
   var textBegin = text.slice(0, text.length/3);
   var textMiddle = text.slice(text.length/3, text.length*2/3);
   var textEnd = text.slice(text.length*2/3, text.length);
-  console.log(`'${textBegin}' '${textMiddle}' '${textEnd}'`);
 
   var duration = text.length / 5 + 's';
-  console.log(duration)
-
+  
   var scrollContainer = document.createElement("div");
   scrollContainer.className = "scroll-container";
   el.appendChild(scrollContainer);
