@@ -106,11 +106,9 @@ function createScrollingText(el, text) {
   var textBegin = text.slice(0, text.length/3);
   var textMiddle = text.slice(text.length/3, text.length*2/3);
   var textEnd = text.slice(text.length*2/3, text.length);
-  console.log(`'${textBegin}' '${textMiddle}' '${textEnd}'`);
 
   var duration = text.length / 5 + 's';
-  console.log(duration)
-
+  
   var scrollContainer = document.createElement("div");
   scrollContainer.className = "scroll-container";
   el.appendChild(scrollContainer);
@@ -200,8 +198,8 @@ function displayPlaylist(eventMode) {
     thumbnail.className = "playlist-thumbnail";
 
     if (itemData.picture) {
-    thumbnail.innerHTML += itemData.picture;
-    thumbnail.childNodes[0].className = "image-thumbnail";
+      thumbnail.innerHTML += itemData.picture;
+      thumbnail.childNodes[0].className = "image-thumbnail";
     } else {
       var fallbackImage = document.createElement("div");
       fallbackImage.classList.add("fallback-thumbnail");
@@ -227,7 +225,6 @@ function displayPlaylist(eventMode) {
     item.appendChild(deleteButton)
 
     var title = textData.childNodes[0];
-    console.log(title);
 
     if (settings["text-overlap"] == true) {
 
@@ -250,7 +247,7 @@ function displayPlaylist(eventMode) {
 
     var lastItem = document.createElement("div");
     lastItem.draggable = false;
-    lastItem.classList = ["playlist-add"];
+    lastItem.classList.add("playlist-add");
 
     var addItemsImage = document.createElement("img");
     addItemsImage.src = "./images/add.png";
@@ -265,12 +262,12 @@ function displayPlaylist(eventMode) {
     fileInput.multiple = "multiple";
     fileInput.style.display = "none";
 
-    fileInput.oninput = e => handleFiles(e.target.files);
+    fileInput.oninput = e => handleFiles(e.target.files);      
     
     lastItem.appendChild(fileInput);
     lastItem.onclick = () => { fileInput.click() }
 
-    container.appendChild(lastItem);
+    document.getElementById("modal-body").appendChild(lastItem);
 
   if (!eventMode) dragAndDrop();
 }
