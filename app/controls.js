@@ -225,7 +225,6 @@ function displayPlaylist(eventMode) {
     item.appendChild(deleteButton)
 
     var title = textData.childNodes[0];
-    console.log(title);
 
     if (settings["text-overlap"] == true) {
 
