@@ -1,4 +1,9 @@
-var player = document.getElementById("player");
+const audioCtx = new AudioContext();
+
+const player = document.getElementById("player");
+const track = audioCtx.createMediaElementSource(player);
+
+track.connect(audioCtx.destination);
 
 function playAudio(index) {
   player.src = playlist[index].url;
