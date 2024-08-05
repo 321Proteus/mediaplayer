@@ -18,6 +18,7 @@ function getSettings() {
     settings["align-mode"] = true;
     settings["playback-speed"] = 1.0;
     settings["playback-volume"] = 0.8;
+    settings["autoplay"] = true;
 
     saveSettings();
 
@@ -73,6 +74,11 @@ function displayPreview(setting) {
 
     case "playback-volume": {
       preview.innerText = Math.round(settings[setting] * 100) + '%';
+    }
+    break;
+
+    case "autoplay": {
+      preview.innerText = (el.checked) ? "enabled" : "disabled";
     }
     break;
 
