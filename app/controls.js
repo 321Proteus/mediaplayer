@@ -13,6 +13,7 @@ window.addEventListener("playerbtnclick", (data) => {
 
   switch (data.detail.id) {
     case "play":
+      audioCtx.resume();
       if (player.src) playerState("switch");
       break;
 
