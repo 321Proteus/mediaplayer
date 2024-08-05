@@ -177,7 +177,7 @@ function adjustGain() {
   saveSettings();
 
   if (gainSlider) {
-    document.getElementById("playback-volume-preview").innerText = value * 100 + '%';
+    document.getElementById("playback-volume-preview").innerText = Math.round(gainSlider.value * 100) + '%';
     transformSlider(gainSlider);
   }
 }
