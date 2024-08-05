@@ -6,6 +6,8 @@ const volumeNode = audioCtx.createGain();
 
 trackNode.connect(volumeNode).connect(audioCtx.destination);
 
+player.ontimeupdate = getSongTime;
+
 function playAudio(index) {
   player.src = playlist[index].url;
   player.currentTime = 0;
@@ -49,17 +51,17 @@ function formatTime(s) {
   return h + ":" + m + ":" + _s;
 }
 
-function getSongTime(player) {
-  var current = Math.floor(player.currentTime).toString();
-  var duration = Math.floor(player.duration).toString();
+function getSongTime() {
+  var current = player.currentTime;
+  var duration = player.duration;
 
-  document.getElementById("song-time").innerHTML = formatTime(current);
-  document.getElementById("song-duration").innerHTML = formatTime(duration);
+  document.getElementById("song-time").innerHTML = formatTime(Math.round(current).toString());
+  document.getElementById("song-duration").innerHTML = formatTime(Math.round(duration).toString());
 
   var slider = document.getElementById("progress-slider");
+
   slider.value = current;
   slider.max = duration;
 
-  var valuePercent = (current / duration) * 100;
   transformSlider(slider);
 }
