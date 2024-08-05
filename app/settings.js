@@ -17,6 +17,7 @@ function getSettings() {
     settings["text-overlap"] = false;
     settings["align-mode"] = true;
     settings["playback-speed"] = 1.0;
+    settings["playback-volume"] = 0.8;
 
     saveSettings();
 
@@ -68,6 +69,11 @@ function displayPreview(setting) {
     case "playback-speed": {
       el.value = settings[setting];
       adjustPlaybackSpeed();
+    }
+    break;
+
+    case "playback-volume": {
+      preview.innerText = settings[setting] * 100 + '%';
     }
     break;
 
@@ -152,9 +158,28 @@ function initTextbox() {
   });
 }
 
-function initSlider() {
-  var slider = document.getElementById("playback-speed");
-  slider.addEventListener("input", adjustPlaybackSpeed);
+function initSliders() {
+  var speedSlider = document.getElementById("playback-speed");
+  speedSlider.addEventListener("input", adjustPlaybackSpeed);
+
+  var gainSlider = document.getElementById("playback-volume");
+  gainSlider.addEventListener("input", adjustGain);
+}
+
+function adjustGain() {
+  var gainSlider = document.getElementById("playback-volume");
+  var value;
+  if (gainSlider) value = gainSlider.value;
+  else value = settings["playback-volume"];
+
+  volumeNode.gain.value = value;
+  settings["playback-volume"] = value;
+  saveSettings();
+
+  if (gainSlider) {
+    document.getElementById("playback-volume-preview").innerText = value * 100 + '%';
+    transformSlider(gainSlider);
+  }
 }
 
 function adjustPlaybackSpeed() {

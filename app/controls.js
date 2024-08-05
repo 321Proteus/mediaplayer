@@ -328,7 +328,7 @@ async function modal(id) {
     displayPlaylistInput();
   } else {
     displaySettings();
-    initSlider();
+    initSliders();
     initTextbox();
   }
   document.getElementById("close").onclick = function () {
