@@ -17,6 +17,7 @@ function removeFromPlaylist(index) {
 player.onended = () => nextItem(false);
 
 function nextItem(force) {
+
   if (!playlist.length) {
     console.error("Playlist is empty");
     return;
@@ -29,22 +30,33 @@ function nextItem(force) {
     if (passCondition) playlistIndex++;
     playAudio(playlistIndex);
     return;
+  }  
+
+  if (settings["autoplay"] == false) {
+    playerState("pause");
+
+  } else {
+
+    switch (loopState) {
+      case 0:
+        playlistIndex++;
+        break;
+      case 1:
+        if (passCondition) playlistIndex++;
+        else playlistIndex = 0;
+        break;
+      case 2:
+        playlistIndex = playlistIndex;
+        break;
+      default:
+        break;
+    }
+
+    playAudio(playlistIndex);
+
   }
 
-  switch (loopState) {
-    case 0:
-      if (passCondition) playlistIndex++;
-      else playlistIndex = playlist.length - 1;
-      break;
-    case 1:
-      if (passCondition) playlistIndex++;
-      else playlistIndex = 0;
-      break;
-    case 2:
-      playlistIndex = playlistIndex;
-  }
 
-  playAudio(playlistIndex);
 }
 
 function previousItem() {
