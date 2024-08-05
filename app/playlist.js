@@ -32,7 +32,7 @@ function nextItem(force) {
     return;
   }  
 
-  if (settings["autoplay"] == false) {
+  if (settings["autoplay"] == false || (!passCondition && loopState == 0)) {
     playerState("pause");
 
   } else {
