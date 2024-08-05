@@ -65,21 +65,35 @@ function startPlaylist() {
 }
 
 function shuffle() {
-  for (let i = playlist.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
+
+  var arrangement = playlist.map((v, i) => i);
+
+  if (playlist.length > 1) {
+
+    for (let i = arrangement.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arrangement[i], arrangement[j]] = [arrangement[j], arrangement[i]];
+    }
   }
+
+  rearrange(arrangement);
+
 }
 
-function rearrange() {
-  var arranged = [];
+function rearrange(order) {
 
-  var list = document.getElementById("playlist").children;
-  for (let i = 0; i < list.length; i++) {
-    arranged.push(parseInt(list[i].getAttribute("order")));
+  if (!order) {
+
+    order = [];
+    var list = document.getElementById("playlist").children;
+
+    for (let i = 0; i < list.length; i++) {
+      order.push(parseInt(list[i].getAttribute("order")));
+    }
+
   }
 
-  playlist = arranged.map((i) => playlist[i]);
+  playlist = order.map((i) => playlist[i]);
 }
 
 // Drag and Drop system controls
