@@ -17,6 +17,8 @@ function getSettings() {
     settings["text-overlap"] = false;
     settings["align-mode"] = true;
     settings["playback-speed"] = 1.0;
+    settings["playback-volume"] = 0.8;
+    settings["autoplay"] = true;
 
     saveSettings();
 
@@ -66,8 +68,17 @@ function displayPreview(setting) {
     break;
 
     case "playback-speed": {
-      el.value = settings[setting];
-      adjustPlaybackSpeed();
+      preview.innerText = settings[setting] + 'x';
+    }
+    break;
+
+    case "playback-volume": {
+      preview.innerText = Math.round(settings[setting] * 100) + '%';
+    }
+    break;
+
+    case "autoplay": {
+      preview.innerText = (el.checked) ? "enabled" : "disabled";
     }
     break;
 
@@ -152,24 +163,29 @@ function initTextbox() {
   });
 }
 
-function initSlider() {
-  var slider = document.getElementById("playback-speed");
-  slider.addEventListener("input", adjustPlaybackSpeed);
+function initSliders() {
+  document.getElementById("playback-speed").oninput = adjustSlider;
+  document.getElementById("playback-volume").oninput = adjustSlider;
 }
 
-function adjustPlaybackSpeed() {
-  var slider = document.getElementById("playback-speed");
+function adjustSlider() {
+  
   var value;
-  if (slider) value = slider.value;
-  else value = settings["playback-speed"];
 
-  player.playbackRate = value;
-  settings["playback-speed"] = value;
+  if (this) value = this.value;
+  else value = settings[this.id];
+
+  if (this.id == "playback-speed") {
+    player.playbackRate = value;
+  } else if (this.id == "playback-volume") {
+    volumeNode.gain.value = value;
+  }
+  settings[this.id] = value;
   saveSettings();
 
-  if (slider) {
-    document.getElementById("playback-speed-preview").innerText = value + "x";
-    transformSlider(slider);
+  if (this) {
+    displayPreview(this.id);
+    transformSlider(this);
   }
 
 }

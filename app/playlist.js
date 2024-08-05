@@ -17,6 +17,7 @@ function removeFromPlaylist(index) {
 player.onended = () => nextItem(false);
 
 function nextItem(force) {
+
   if (!playlist.length) {
     console.error("Playlist is empty");
     return;
@@ -29,22 +30,33 @@ function nextItem(force) {
     if (passCondition) playlistIndex++;
     playAudio(playlistIndex);
     return;
+  }  
+
+  if (settings["autoplay"] == false || (!passCondition && loopState == 0)) {
+    playerState("pause");
+
+  } else {
+
+    switch (loopState) {
+      case 0:
+        playlistIndex++;
+        break;
+      case 1:
+        if (passCondition) playlistIndex++;
+        else playlistIndex = 0;
+        break;
+      case 2:
+        playlistIndex = playlistIndex;
+        break;
+      default:
+        break;
+    }
+
+    playAudio(playlistIndex);
+
   }
 
-  switch (loopState) {
-    case 0:
-      if (passCondition) playlistIndex++;
-      else playlistIndex = playlist.length - 1;
-      break;
-    case 1:
-      if (passCondition) playlistIndex++;
-      else playlistIndex = 0;
-      break;
-    case 2:
-      playlistIndex = playlistIndex;
-  }
 
-  playAudio(playlistIndex);
 }
 
 function previousItem() {
@@ -65,21 +77,35 @@ function startPlaylist() {
 }
 
 function shuffle() {
-  for (let i = playlist.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
+
+  var arrangement = playlist.map((v, i) => i);
+
+  if (playlist.length > 1) {
+
+    for (let i = arrangement.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arrangement[i], arrangement[j]] = [arrangement[j], arrangement[i]];
+    }
   }
+
+  rearrange(arrangement);
+
 }
 
-function rearrange() {
-  var arranged = [];
+function rearrange(order) {
 
-  var list = document.getElementById("playlist").children;
-  for (let i = 0; i < list.length; i++) {
-    arranged.push(parseInt(list[i].getAttribute("order")));
+  if (!order) {
+
+    order = [];
+    var list = document.getElementById("playlist").children;
+
+    for (let i = 0; i < list.length; i++) {
+      order.push(parseInt(list[i].getAttribute("order")));
+    }
+
   }
 
-  playlist = arranged.map((i) => playlist[i]);
+  playlist = order.map((i) => playlist[i]);
 }
 
 // Drag and Drop system controls

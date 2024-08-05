@@ -13,6 +13,7 @@ window.addEventListener("playerbtnclick", (data) => {
 
   switch (data.detail.id) {
     case "play":
+      audioCtx.resume();
       if (player.src) playerState("switch");
       break;
 
@@ -245,31 +246,35 @@ function displayPlaylist(eventMode) {
 
   }
 
-    var lastItem = document.createElement("div");
-    lastItem.draggable = false;
-    lastItem.classList.add("playlist-add");
-
-    var addItemsImage = document.createElement("img");
-    addItemsImage.src = "./images/add.png";
-    lastItem.appendChild(addItemsImage)
-
-    var addItemsText = document.createElement("div");
-    addItemsText.innerText = "Click to add songs\nYou can also drag and drop";
-    lastItem.appendChild(addItemsText);
-
-    var fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.multiple = "multiple";
-    fileInput.style.display = "none";
-
-    fileInput.oninput = e => handleFiles(e.target.files);      
-    
-    lastItem.appendChild(fileInput);
-    lastItem.onclick = () => { fileInput.click() }
-
-    document.getElementById("modal-body").appendChild(lastItem);
-
   if (!eventMode) dragAndDrop();
+}
+
+function displayPlaylistInput() {
+
+  var inputElement = document.createElement("div");
+  inputElement.draggable = false;
+  inputElement.classList.add("playlist-add");
+
+  var addItemsImage = document.createElement("img");
+  addItemsImage.src = "./images/add.png";
+  inputElement.appendChild(addItemsImage)
+
+  var addItemsText = document.createElement("div");
+  addItemsText.innerText = "Click to add songs\nYou can also drag and drop";
+  inputElement.appendChild(addItemsText);
+
+  var fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.multiple = "multiple";
+  fileInput.style.display = "none";
+
+  fileInput.oninput = e => handleFiles(e.target.files);      
+    
+  inputElement.appendChild(fileInput);
+  inputElement.onclick = () => { fileInput.click() }
+    
+  document.getElementById("modal-body").appendChild(inputElement); 
+
 }
 
 function displayMetadata(songData) {
@@ -318,10 +323,12 @@ async function modal(id) {
 
   container.innerHTML = content;
 
-  if (id == "playlist") displayPlaylist();
-  else {
+  if (id == "playlist") {
+    displayPlaylist();
+    displayPlaylistInput();
+  } else {
     displaySettings();
-    initSlider();
+    initSliders();
     initTextbox();
   }
   document.getElementById("close").onclick = function () {
