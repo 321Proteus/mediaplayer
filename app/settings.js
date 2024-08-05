@@ -67,13 +67,12 @@ function displayPreview(setting) {
     break;
 
     case "playback-speed": {
-      el.value = settings[setting];
-      adjustPlaybackSpeed();
+      preview.innerText = settings[setting] + 'x';
     }
     break;
 
     case "playback-volume": {
-      preview.innerText = settings[setting] * 100 + '%';
+      preview.innerText = Math.round(settings[setting] * 100) + '%';
     }
     break;
 
@@ -159,42 +158,28 @@ function initTextbox() {
 }
 
 function initSliders() {
-  var speedSlider = document.getElementById("playback-speed");
-  speedSlider.addEventListener("input", adjustPlaybackSpeed);
-
-  var gainSlider = document.getElementById("playback-volume");
-  gainSlider.addEventListener("input", adjustGain);
+  document.getElementById("playback-speed").oninput = adjustSlider;
+  document.getElementById("playback-volume").oninput = adjustSlider;
 }
 
-function adjustGain() {
-  var gainSlider = document.getElementById("playback-volume");
+function adjustSlider() {
+  
   var value;
-  if (gainSlider) value = gainSlider.value;
-  else value = settings["playback-volume"];
 
-  volumeNode.gain.value = value;
-  settings["playback-volume"] = value;
-  saveSettings();
+  if (this) value = this.value;
+  else value = settings[this.id];
 
-  if (gainSlider) {
-    document.getElementById("playback-volume-preview").innerText = Math.round(gainSlider.value * 100) + '%';
-    transformSlider(gainSlider);
+  if (this.id == "playback-speed") {
+    player.playbackRate = value;
+  } else if (this.id == "playback-volume") {
+    volumeNode.gain.value = value;
   }
-}
-
-function adjustPlaybackSpeed() {
-  var slider = document.getElementById("playback-speed");
-  var value;
-  if (slider) value = slider.value;
-  else value = settings["playback-speed"];
-
-  player.playbackRate = value;
-  settings["playback-speed"] = value;
+  settings[this.id] = value;
   saveSettings();
 
-  if (slider) {
-    document.getElementById("playback-speed-preview").innerText = value + "x";
-    transformSlider(slider);
+  if (this) {
+    displayPreview(this.id);
+    transformSlider(this);
   }
 
 }
